@@ -5,7 +5,7 @@ export type CustomerProfile = {
     email: string;
     name: string;
     phone: string;
-    img: string;
+    image: string;
     birthDate: Date;
     password: string;
     isActive: boolean;

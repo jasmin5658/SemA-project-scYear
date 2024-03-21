@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Nav from "../components/Nav";
+import Navbar from "../components/Navbar";
 import Product from "../components/Product";
 import { ProductPage } from "../types/ProductPage";
 import { ProductsContext } from "../context/ProductsContext";
@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <>
-      <Nav />
+      <Navbar />
       <div>Home</div>
       {
         products.map((item: ProductPage) => {

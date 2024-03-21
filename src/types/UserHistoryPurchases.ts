@@ -1,9 +1,8 @@
 import React from "react";
-import { product } from "./Product";
-
+    import {ProductPage } from "./ProductPage";
 export type UserHistoryPurchases={
     numOfPurchases:number,
-    productsArray:product,
+    productsArray:ProductPage,
     amountPurcahse:number,
     priceOnDayOfPurchase:number,
     dateOfPurchase:Date

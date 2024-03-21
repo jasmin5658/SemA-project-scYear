@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import React from 'react';
 
 // יצירת הקונטקסט
 export const StoreContext = createContext<any>({});
@@ -36,7 +37,6 @@ export default function StoreProvider({ children }: any) {
     localStorage.setItem('products', JSON.stringify(updatedProducts));
   };
 
-  // ערך המועבר ב-context
   const value = {
     products,
     addProduct,

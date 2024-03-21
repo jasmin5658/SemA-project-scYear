@@ -6,7 +6,7 @@ export const ProductsContext = createContext<any>({});
 
 // יצירת קומפוננטה פונקציונלית עבור ניהול מוצרים
 export default function ProductsProvider({ children }: any) {
-  const [products, setProducts] = useState<ProductPage[]>([ {
+  const [products, setProducts] = useState<ProductPage[]>([{
     id: 1,
     name: 'purple flower',
     shortDesc: 'shortDesc',
@@ -49,7 +49,7 @@ export default function ProductsProvider({ children }: any) {
   }, []);
 
   // פונקציה שמקבלת את שם המוצר ומוסיפה במידה ולא קיים במאגר
-function addProduct(item:ProductPage) {
+  function addProduct(item: ProductPage) {
     if (!products.some((product) => product.id === item.id)) {
       const updatedProducts = [...products];
       updatedProducts.push(item);
@@ -66,17 +66,34 @@ function addProduct(item:ProductPage) {
       localStorage.setItem('products', JSON.stringify(updatedProducts));
     }
   }
+  
+  // פונקציה לעדכון מלאי מוצר
+  const updateStock = (productId: number, quantity: number) => {
+    const updatedProducts = products.map((product: any) => {
+      if (product.id === productId) {
+        return { ...product, stock: quantity };
+      }
+      return product;
+    });
+    setProducts(updatedProducts);
+    localStorage.setItem('products', JSON.stringify(updatedProducts));
+  };
+
 
   // כל המידע שנרצה לשתף עם קומפוננטות אחרות
   const value = {
     products,
     addProduct,
     deleteProduct,
+    updateStock,
   };
 
   return (
     <ProductsContext.Provider value={value}>
       {children}
     </ProductsContext.Provider>
+
+
+
   );
 }
