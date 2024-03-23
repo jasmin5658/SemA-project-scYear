@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { ProductPage } from "../types/ProductPage";
 
+
 // יצירת הקונטקסט
 export const ProductsContext = createContext<any>({});
 
@@ -41,11 +42,13 @@ export default function ProductsProvider({ children }: any) {
     discount: 90
   }]);
 
+    // טעינת המוצרים מה-localStorage בטעינה הראשונה של המערכת
   useEffect(() => {
     const storedProducts = localStorage.getItem('products');
     if (storedProducts) {
       setProducts(JSON.parse(storedProducts));
-    }
+    
+    };
   }, []);
 
   // פונקציה שמקבלת את שם המוצר ומוסיפה במידה ולא קיים במאגר

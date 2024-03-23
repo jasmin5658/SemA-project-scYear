@@ -1,10 +1,11 @@
 import Navbar from "../components/Navbar";
+import "../styles/styles.css";
 
 export default function About() {
   return (
     <>
       <Navbar />
-      <div>About</div>
+      <div className="about">
       <h1>about me</h1>
       My name is Adam, I am a student at the Bezalel School of Art.
       I grew up in an artistic environment.
@@ -15,6 +16,7 @@ export default function About() {
       So as a young artist exploring the tiny bits of life,
       I invite you to explore my website.
       Enjoy !
+      </div>
     </>
   )
 }

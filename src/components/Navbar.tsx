@@ -1,4 +1,3 @@
-import '../index.css';
 import { Container, Navbar as NavbarBs } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -9,7 +8,7 @@ export default function Navbar() {
       <Container>
         {/* Logo */}
         <Link to="/">
-          <img src="/Images/logoNew.jpg" alt="Logo" style={{ maxHeight: "5rem", marginRight: "1rem" }} />
+          <img src="/Images/logoNew.jpg" alt="Logo" style={{maxHeight: "5rem", marginRight: "1rem", borderRadius: "50%" }} />
         </Link>
 
         {/* Links */}
@@ -23,7 +22,7 @@ export default function Navbar() {
           variant="outline-primary"
           className="rounded-circle"
         >
-          
+
           <svg
             fill="none"
             stroke="currentColor"

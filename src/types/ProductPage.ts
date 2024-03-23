@@ -9,7 +9,6 @@ export type ProductPage = {
     currQty: number;
     price: number;
     discount?: number;   
-
 }
 
 export type ProductPageProps = {
