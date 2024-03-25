@@ -1,4 +1,3 @@
-import React from "react";
 
 export type productsArray={
     ProductId:number, // מזהה מוצר
@@ -12,7 +11,5 @@ export type UserHistoryPurchases={
     dateOfPurchase:Date // תאריך ביצוע הרכישה
 }
 
-export type UserHistoryPurchasesProps = {
-    UserHistoryPurchases:Array<UserHistoryPurchases>
-}
+
 

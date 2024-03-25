@@ -26,7 +26,7 @@ export default function UserProvider({ children }: any) {
         street: "",
         homeNumber: 0
     },
-    UserHistoryPurchases: {
+    UserHistoryPurchases:[ {
         numOfPurchases: 0,
         productsArray: {
             ProductId: 0, 
@@ -34,7 +34,7 @@ export default function UserProvider({ children }: any) {
         },
         priceOnDayOfPurchase: 0,
         dateOfPurchase: new Date()
-    }
+    }]
   }]);
 
   useEffect(() => {

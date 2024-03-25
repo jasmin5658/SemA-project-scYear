@@ -14,10 +14,7 @@ export type User = {
     isActive: boolean; //האם לקוח פעיל 
     address: Address; // כתובת מגורים --> TYPE ADDRESS
     deliveryAddress?: Address; //כתובת למשלוח --TYPE ADDRESS>
-    UserHistoryPurchases:UserHistoryPurchases; //היסטוריית רכישות
+    UserHistoryPurchases:UserHistoryPurchases[]; //היסטוריית רכישות
 
 }
 
-export type UserProps = {
-    User:User
-}

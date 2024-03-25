@@ -4,11 +4,11 @@ import { Button } from "react-bootstrap";
 
 export default function Navbar() {
   return (
-    <NavbarBs className="bg-white shadow-sm mb-3">
+    <NavbarBs  sticky="top"  className="bg-white shadow-sm mb-1">
       <Container>
         {/* Logo */}
         <Link to="/">
-          <img src="/Images/logoNew.jpg" alt="Logo" style={{maxHeight: "5rem", marginRight: "1rem", borderRadius: "50%" }} />
+          <img src="/Images/logoNew.jpg" alt="Logo" style={{ maxHeight: "5rem", marginRight: "1rem", borderRadius: "50%" }} />
         </Link>
 
         {/* Links */}

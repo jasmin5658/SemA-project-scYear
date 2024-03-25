@@ -10,11 +10,3 @@ export type ProductPage = {
     price: number;
     discount?: number;   
 }
-
-export type ProductPageProps = {
-    productList:Array<ProductPage>
-}
-
-export type ProductComp = {
-    product:ProductPage
-}

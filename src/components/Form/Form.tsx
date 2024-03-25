@@ -1,30 +1,65 @@
 import { FormEvent, useContext, useState } from "react"
 import { ProductsContext } from "../../context/ProductsContext"
-
+import { Product } from "../../types/Store";
 export default function Form() {
   const { addProduct } = useContext<any>(ProductsContext);
 
-  const [productName, setProductName] = useState<string>("");
+  const [product, setProduct] = useState<Product>({
+    id: 0,
+    name: '',
+    shortDesc: '',
+    longDesc: '',
+    imag: '',
+    minQty: 0,
+    currQty: 0,
+    price: 0,
+    discount: 0
+  });
 
-  function Update(event: FormEvent) {
+  function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    addProduct(productName);
-    setProductName("");
+
+    if(product.id==0 || product.name=='' || product.shortDesc=='' || product.imag=='' || product.minQty==0 || product.currQty==0 || product.price==0){
+      alert("invalid info")
+      return;
+    }
+    addProduct(product);
   }
 
   return (
     <>
-      <form onSubmit={Update}>
-        <input type="text"
-          placeholder="Name...."
-          value={productName}
-          onChange={(event) => setProductName(event.target.value)}
-        />
+    <form onSubmit={handleSubmit}></form>
+      <div>
+<label>Id</label>
+<input type="number"
+onChange={(event)=>setProduct({...product,id:Number(event.target.value)})}/>
+      </div>
 
-        <button type="submit">Submit</button>
-      </form>
+    <div>
+<label>Name</label>
+<input type="text"
+onChange={(event)=>setProduct({...product,name:String(event.target.value)})}/>
+      </div>
 
+    <div>
+<label>shortDesc</label>
+<input type="text"
+onChange={(event)=>setProduct({...product,shortDesc:String(event.target.value)})}/>
+      </div>
+
+    <div>
+<label>longDesc</label>
+<input type="text"
+onChange={(event)=>setProduct({...product,longDesc:String(event.target.value)})}/>
+      </div>
+
+    <div>
+<label>imag</label>
+<input type="text"
+onChange={(event)=>setProduct({...product,imag:String(event.target.value)})}/>
+      </div>
 
     </>
   )
+
 }

@@ -1,76 +1,133 @@
-import { createContext, useState, useEffect } from "react";
-import { ProductPage } from "../types/ProductPage";
+import React, { createContext, useState, useEffect } from "react";
+import { Product } from "../types/Store";
+import { ShoppingCart } from "../types/ShoppingCart";
 
-
-// יצירת הקונטקסט
+// Create the context
 export const ProductsContext = createContext<any>({});
 
-// יצירת קומפוננטה פונקציונלית עבור ניהול מוצרים
+
+// Functional component for managing products
 export default function ProductsProvider({ children }: any) {
-  const [products, setProducts] = useState<ProductPage[]>([{
-    id: 1,
-    name: 'purple flower',
-    shortDesc: 'shortDesc',
-    longDesc: 'longDesc',
-    imag: 'https://static.pexels.com/photos/36753/flower-purple-lical-blosso.jpg',
-    minQty: 1,
-    currQty: 1,
-    price: 100,
-    discount: 10
+  // Define cart items state
+  const [cartItems, setCartItems] = useState<ShoppingCart[]>([
+    {
+      productId: 1,
+      productName: 'Blue storm',
+      quantity: 1,
+      price: 200
+    }
+  ]);
+  
 
-  },
-  {
-    id: 2,
-    name: 'red flower',
-    shortDesc: 'shortDesc',
-    longDesc: 'longDesc',
-    imag: 'https://www.gardendesign.com/pictures/images/675x529Max/site_3/revolution-red-gerbera-daisy-red-with-dark-eye-flower-proven-winners_16172.jpg',
-    minQty: 1,
-    currQty: 1,
-    price: 290,
-    discount: 13
-  },
-  {
-    id: 3,
-    name: 'yellow flower',
-    shortDesc: 'shortDesc',
-    longDesc: 'longDesc',
-    imag: 'https://img.freepik.com/free-photo/yellow-flower-white-background_1203-2149.jpg?size=338&ext=jpg&ga=GA1.1.1395880969.1709596800&semt=ais',
-    minQty: 1,
-    currQty: 1,
-    price: 200,
-    discount: 90
-  }]);
+  // Function to get the quantity of a specific item in the cart
+  function getItemQuantity(id: number) {
+    const item = cartItems.find((item) => item.productId === id);
+    return item ? item.quantity : 0;
+  }
 
-    // טעינת המוצרים מה-localStorage בטעינה הראשונה של המערכת
+  // Function to increase the quantity of an item in the cart
+  function increaseCartQuantity(id: number) {
+    setCartItems((currItems) => {
+      if (currItems.find((item) => item.productId === id) == null) {
+        return [...currItems, { productId: id, quantity: 1, productName: "", price: 0 }];
+      } else {
+        return currItems.map((item) => {
+          if (item.productId === id) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  }
+
+  // Function to decrease the quantity of an item in the cart
+  function decreaseCartQuantity(id: number) {
+    setCartItems((currItems) => {
+      if (currItems.find((item) => item.productId === id)?.quantity === 1) {
+        return currItems.filter((item) => item.productId !== id);
+      } else {
+        return currItems.map((item) => {
+          if (item.productId === id) {
+            return { ...item, quantity: item.quantity - 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  }
+
+  // Function to remove an item from the cart
+  function removeFromCart(id: number) {
+    setCartItems((currItems) => {
+      return currItems.filter((item) => item.productId !== id);
+    });
+  }
+
+  // Define product state
+  const [products, setProducts] = useState<Product[]>([
+    {
+      id: 1,
+      name: 'Blue storm',
+      shortDesc: 'shortDesc',
+      longDesc: 'longDesc',
+      imag: '../public/images/blue.jpg',
+      minQty: 1,
+      currQty: 0,
+      price: 200,
+      discount: 10
+    },
+    {
+      id: 2,
+      name: 'Pink storm',
+      shortDesc: 'shortDesc',
+      longDesc: 'longDesc',
+      imag: '../public/images/pink.jpg',
+      minQty: 1,
+      currQty: 6,
+      price: 200,
+      discount: 10
+    },
+    {
+      id: 3,
+      name: 'Rainbow',
+      shortDesc: 'shortDesc',
+      longDesc: 'longDesc',
+      imag: '../public/images/rainbow.jpg',
+      minQty: 1,
+      currQty: 1,
+      price: 350,
+      discount: 0
+    }
+  ]);
+
+  // Load products from localStorage on initial component mount
   useEffect(() => {
     const storedProducts = localStorage.getItem('products');
     if (storedProducts) {
       setProducts(JSON.parse(storedProducts));
-    
-    };
+    }
   }, []);
 
-  // פונקציה שמקבלת את שם המוצר ומוסיפה במידה ולא קיים במאגר
-  function addProduct(item: ProductPage) {
+  // Function to add a product
+  function addProduct(item: Product) {
     if (!products.some((product) => product.id === item.id)) {
-      const updatedProducts = [...products];
-      updatedProducts.push(item);
+      const updatedProducts = [...products, item];
       setProducts(updatedProducts);
       localStorage.setItem('products', JSON.stringify(updatedProducts));
     }
   }
 
-  // פונקציה שמקבלת את שם המוצר ומוחקת אותו מהמאגר אם קיים
-  function deleteProduct(item: ProductPage) {
-    if (products.some((product) => product.id === item.id)) {
-      const updatedProducts = products.filter((product) => product.id !== item.id);
-      setProducts(updatedProducts);
-      localStorage.setItem('products', JSON.stringify(updatedProducts));
-    }
+  // Function to delete a product
+  function deleteProduct(item: Product) {
+    const updatedProducts = products.filter((product) => product.id !== item.id);
+    setProducts(updatedProducts);
+    localStorage.setItem('products', JSON.stringify(updatedProducts));
   }
-  
-  // פונקציה לעדכון מלאי מוצר
+
+  // Function to update product stock
   const updateStock = (productId: number, quantity: number) => {
     const updatedProducts = products.map((product: any) => {
       if (product.id === productId) {
@@ -82,21 +139,23 @@ export default function ProductsProvider({ children }: any) {
     localStorage.setItem('products', JSON.stringify(updatedProducts));
   };
 
+// Context value to provide to consumers
+const value = {
+  products,
+  addProduct,
+  deleteProduct,
+  updateStock,
+  getItemQuantity,
+  increaseCartQuantity,
+  decreaseCartQuantity,
+  removeFromCart,
+  cartItems,
+};
 
-  // כל המידע שנרצה לשתף עם קומפוננטות אחרות
-  const value = {
-    products,
-    addProduct,
-    deleteProduct,
-    updateStock,
-  };
-
+  // Render the provider with the provided value
   return (
     <ProductsContext.Provider value={value}>
       {children}
     </ProductsContext.Provider>
-
-
-
   );
 }
