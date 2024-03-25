@@ -36,3 +36,12 @@ export type UserHistoryPurchasesProps = {
 export type ShoppingCartProviderProps = {
     children:ReactNode
 }
+
+export type ShoppingCartProps = {
+    isOpen:boolean
+}
+
+export type CartItemsProps = {
+    id:number;
+    quantity:number;
+}

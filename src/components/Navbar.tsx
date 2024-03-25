@@ -1,14 +1,25 @@
-import { Container, Navbar as NavbarBs } from "react-bootstrap";
+import React from "react";
+import { Container, Navbar as NavbarBs, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { ShoppingCart } from "../context/ShoppingCartContext";
 
 export default function Navbar() {
+  const { openCart, cartQuantity } = ShoppingCart();
+
   return (
-    <NavbarBs  sticky="top"  className="bg-white shadow-sm mb-1">
+    <NavbarBs sticky="top" className="bg-white shadow-sm mb-1">
       <Container>
         {/* Logo */}
         <Link to="/">
-          <img src="/Images/logoNew.jpg" alt="Logo" style={{ maxHeight: "5rem", marginRight: "1rem", borderRadius: "50%" }} />
+          <img
+            src="/Images/logoNew.jpg"
+            alt="Logo"
+            style={{
+              maxHeight: "5rem",
+              marginRight: "1rem",
+              borderRadius: "50%",
+            }}
+          />
         </Link>
 
         {/* Links */}
@@ -17,12 +28,25 @@ export default function Navbar() {
         <Link to="/store">Store</Link>
         <Link to="/contact">contact</Link>
 
-        {/* Cart button */}
-        <Button style={{ width: "3rem", height: "3rem", position: "relative" }}
-          variant="outline-primary"
-          className="rounded-circle"
-        >
+        {/* Login Button */}
+        <Link to="/login">
+          <Button variant="primary" className="ml-auto">
+            Log In
+          </Button>
+        </Link>
 
+        {/* Cart Button */}
+           {cartQuantity > 0  && (
+           <Button
+          onClick={openCart}
+          style={{
+            width: "3rem",
+            height: "3rem",
+            position: "relative",
+          }}
+          variant="outline-primary"
+          className="rounded-circle ml-2"
+        >
           <svg
             fill="none"
             stroke="currentColor"
@@ -37,18 +61,22 @@ export default function Navbar() {
             <path d="M21 21 A1 1 0 0 1 20 22 A1 1 0 0 1 19 21 A1 1 0 0 1 21 21 z" />
             <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" />
           </svg>
-          <div className="rounded-circle bg-danger d-flex justify-content-center
- align-items-center" style={{
+          <div
+            className="rounded-circle bg-danger d-flex justify-content-center align-items-center"
+            style={{
               color: "white",
               width: "1.5rem",
               height: "1.5rem",
               position: "absolute",
               bottom: 0,
               right: 0,
-              transform: "translate(25%, 25%)"
-            }}>3</div>
-        </Button>
+              transform: "translate(25%, 25%)",
+            }}
+          >
+            {cartQuantity}
+          </div>
+        </Button>)}     
       </Container>
     </NavbarBs>
-  )
+  );
 }

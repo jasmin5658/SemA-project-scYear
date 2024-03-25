@@ -17,7 +17,7 @@ export default function ProductsProvider({ children }: any) {
       price: 200
     }
   ]);
-  
+
 
   // Function to get the quantity of a specific item in the cart
   function getItemQuantity(id: number) {
@@ -100,6 +100,27 @@ export default function ProductsProvider({ children }: any) {
       currQty: 1,
       price: 350,
       discount: 0
+    },
+    {
+      id: 4,
+      name: 'sad storm',
+      shortDesc: 'shortDesc',
+      longDesc: 'longDesc',
+      imag: '../public/images/obb.jpg',
+      minQty: 1,
+      currQty: 0,
+      price: 490,
+    },
+    {
+      id: 5,
+      name: 'happy storm',
+      shortDesc: 'shortDesc',
+      longDesc: 'longDesc',
+      imag: '../public/images/opb.jpg',
+      minQty: 1,
+      currQty: 0,
+      price: 433,
+      discount: 10
     }
   ]);
 
@@ -139,18 +160,18 @@ export default function ProductsProvider({ children }: any) {
     localStorage.setItem('products', JSON.stringify(updatedProducts));
   };
 
-// Context value to provide to consumers
-const value = {
-  products,
-  addProduct,
-  deleteProduct,
-  updateStock,
-  getItemQuantity,
-  increaseCartQuantity,
-  decreaseCartQuantity,
-  removeFromCart,
-  cartItems,
-};
+  // Context value to provide to consumers
+  const value = {
+    products,
+    addProduct,
+    deleteProduct,
+    updateStock,
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+    cartItems,
+  };
 
   // Render the provider with the provided value
   return (

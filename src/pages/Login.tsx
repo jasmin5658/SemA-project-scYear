@@ -1,9 +1,17 @@
-// דף "התחברות" שבו לקוחות קיימים יכולים להזין את פרטי החשבון שלהם.
-// ודא שהפרטים תקינים לפני התחברות.
-// שמור את מצב ההתחברות ב-localStorage.
-// הוסף כפתור "התנתקות" בדף "החשבון שלי".
+
+import LoginForm from "../components/Form/LoginForm";
+import RegistrationForm from "../components/Form/RegistrationForm";
+import Navbar from "../components/Navbar";
+
 export default function Login() {
     return (
-        <div>Login</div>
+        <>
+        <Navbar />
+        <div className="container">
+      <h2>Login / Registration</h2>
+      <LoginForm />
+      <RegistrationForm />
+    </div>
+    </>
     )
 }

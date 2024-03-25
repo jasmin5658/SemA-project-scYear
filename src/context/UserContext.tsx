@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { User } from "../types/User";
 
-
 // Create the user context
 export const UserContext = createContext<any>({});
 
