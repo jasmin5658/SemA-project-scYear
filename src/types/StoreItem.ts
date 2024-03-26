@@ -1,5 +1,5 @@
 
-export type ProductPage = {
+export type StoreItem = {
     id: number;
     name: string;
     shortDesc: string;

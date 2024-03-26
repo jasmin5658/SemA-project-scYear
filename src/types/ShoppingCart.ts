@@ -7,9 +7,4 @@ export type ShoppingCart = {
    
   }
 
-   export type CartItems ={
-    quantity: number;
-    productName: string;
-    cartQuantity: number;
-    price: number;
-}
+

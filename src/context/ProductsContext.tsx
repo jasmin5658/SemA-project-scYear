@@ -1,150 +1,19 @@
-import React, { createContext, useState, useEffect } from "react";
+import  { createContext, useState, useEffect } from "react";
 import { Product } from "../types/Store";
-import { ShoppingCart } from "../types/ShoppingCart";
 
 // Create the context
 export const ProductsContext = createContext<any>({});
-
-
-// Functional component for managing products
 export default function ProductsProvider({ children }: any) {
-  // Define cart items state
-  const [cartItems, setCartItems] = useState<ShoppingCart[]>([
-    {
-      productId: 1,
-      productName: 'Blue storm',
-      quantity: 1,
-      price: 200
-    }
-  ]);
 
+  const [products, setProducts] = useState<Product[]>([]);
+    
 
-  // Function to get the quantity of a specific item in the cart
-  function getItemQuantity(id: number) {
-    const item = cartItems.find((item) => item.productId === id);
-    return item ? item.quantity : 0;
-  }
-
-  // Function to increase the quantity of an item in the cart
-  function increaseCartQuantity(id: number) {
-    setCartItems((currItems) => {
-      if (currItems.find((item) => item.productId === id) == null) {
-        return [...currItems, { productId: id, quantity: 1, productName: "", price: 0 }];
-      } else {
-        return currItems.map((item) => {
-          if (item.productId === id) {
-            return { ...item, quantity: item.quantity + 1 };
-          } else {
-            return item;
-          }
-        });
-      }
-    });
-  }
-
-  // Function to decrease the quantity of an item in the cart
-  function decreaseCartQuantity(id: number) {
-    setCartItems((currItems) => {
-      if (currItems.find((item) => item.productId === id)?.quantity === 1) {
-        return currItems.filter((item) => item.productId !== id);
-      } else {
-        return currItems.map((item) => {
-          if (item.productId === id) {
-            return { ...item, quantity: item.quantity - 1 };
-          } else {
-            return item;
-          }
-        });
-      }
-    });
-  }
-
-  // Function to remove an item from the cart
-  function removeFromCart(id: number) {
-    setCartItems((currItems) => {
-      return currItems.filter((item) => item.productId !== id);
-    });
-  }
-
-  // Define product state
-  const [products, setProducts] = useState<Product[]>([
-    {
-      id: 1,
-      name: 'Blue storm',
-      shortDesc: 'shortDesc',
-      longDesc: 'longDesc',
-      imag: '../public/images/blue.jpg',
-      minQty: 1,
-      currQty: 0,
-      price: 200,
-      discount: 10
-    },
-    {
-      id: 2,
-      name: 'Pink storm',
-      shortDesc: 'shortDesc',
-      longDesc: 'longDesc',
-      imag: '../public/images/pink.jpg',
-      minQty: 1,
-      currQty: 6,
-      price: 200,
-      discount: 10
-    },
-    {
-      id: 3,
-      name: 'Rainbow',
-      shortDesc: 'shortDesc',
-      longDesc: 'longDesc',
-      imag: '../public/images/rainbow.jpg',
-      minQty: 1,
-      currQty: 1,
-      price: 350,
-      discount: 0
-    },
-    {
-      id: 4,
-      name: 'sad storm',
-      shortDesc: 'shortDesc',
-      longDesc: 'longDesc',
-      imag: '../public/images/obb.jpg',
-      minQty: 1,
-      currQty: 0,
-      price: 490,
-    },
-    {
-      id: 5,
-      name: 'happy storm',
-      shortDesc: 'shortDesc',
-      longDesc: 'longDesc',
-      imag: '../public/images/opb.jpg',
-      minQty: 1,
-      currQty: 0,
-      price: 433,
-      discount: 10
-    },
-    {
-      id: 6,
-      name: 'Yellow sorm',
-      shortDesc: 'shortDesc',
-      longDesc: 'longDesc',
-      imag: '../public/images/yellow.jpg',
-      minQty: 1,
-      currQty: 1,
-      price: 287,
-      discount: 0
-    },
-    {
-      id: 7,
-      name: 'forest',
-      shortDesc: 'shortDesc',
-      longDesc: 'longDesc',
-      imag: '../public/images/trees.jpg',
-      minQty: 1,
-      currQty: 1,
-      price: 524,
-      discount: 12 
-    }
-  ]);
+   function loadProducts(): Product[] {
+    let products = localStorage.getItem('products');
+    if (products) //if(products !== undefined)
+        return JSON.parse(products) as Product[];
+    return [];
+}
 
   // Load products from localStorage on initial component mount
   useEffect(() => {
@@ -188,12 +57,96 @@ export default function ProductsProvider({ children }: any) {
     addProduct,
     deleteProduct,
     updateStock,
-    getItemQuantity,
-    increaseCartQuantity,
-    decreaseCartQuantity,
-    removeFromCart,
-    cartItems,
+    loadProducts,
   };
+
+  useEffect(() => {
+    let products = loadProducts();
+    if(products.length == 0) {
+      products = [
+        {
+          id: 1,
+          name: 'Blue storm',
+          shortDesc: 'shortDesc',
+          imag: '../public/images/blue.jpg',
+          minQty: 1,
+          currQty: 0,
+          price: 200,
+          discount: 10
+        },
+        {
+          id: 2,
+          name: 'Pink storm',
+          shortDesc: 'shortDesc',
+          longDesc: 'longDesc',
+          imag: '../public/images/pink.jpg',
+          minQty: 1,
+          currQty: 6,
+          price: 200,
+          discount: 10
+        },
+        {
+          id: 3,
+          name: 'Rainbow',
+          shortDesc: 'shortDesc',
+          longDesc: 'longDesc',
+          imag: '../public/images/rainbow.jpg',
+          minQty: 1,
+          currQty: 1,
+          price: 350,
+          discount: 0
+        },
+        {
+          id: 4,
+          name: 'sad storm',
+          shortDesc: 'shortDesc',
+          longDesc: 'longDesc',
+          imag: '../public/images/obb.jpg',
+          minQty: 1,
+          currQty: 0,
+          price: 490,
+        },
+        {
+          id: 5,
+          name: 'happy storm',
+          shortDesc: 'shortDesc',
+          longDesc: 'longDesc',
+          imag: '../public/images/opb.jpg',
+          minQty: 1,
+          currQty: 0,
+          price: 433,
+          discount: 10
+        },
+        {
+          id: 6,
+          name: 'Yellow sorm',
+          shortDesc: 'shortDesc',
+          longDesc: 'longDesc',
+          imag: '../public/images/yellow.jpg',
+          minQty: 1,
+          currQty: 1,
+          price: 287,
+          discount: 0
+        },
+        {
+          id: 7,
+          name: 'forest',
+          shortDesc: 'shortDesc',
+          longDesc: 'longDesc',
+          imag: '../public/images/trees.jpg',
+          minQty: 1,
+          currQty: 1,
+          price: 524,
+          discount: 12
+        }
+      ];
+    }
+  setProducts(products);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem('products', JSON.stringify(products));
+}, [products]);
 
   // Render the provider with the provided value
   return (
