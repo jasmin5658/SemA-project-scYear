@@ -22,3 +22,54 @@ body {
   text-shadow: 2px 2px 4px #000000;
   }
 
+  /* For register page */
+.register-form-container {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  transform: translateY(20px); /* Initially move down */
+  transition: transform 0.5s ease; /* Smooth transition */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ 
+}
+
+.register-form-container .card-body {
+  flex: 1;
+  margin-right: 20px; /* Adjust the margin as needed */
+}
+
+.register-form-container .register-image {
+  width: 100%;
+  max-width: 400px; /* Adjust the maximum width of the image */
+  object-fit: cover;
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+/* For login page */
+.login-form-container {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  transform: translateY(20px); /* Initially move down */
+  transition: transform 0.5s ease; /* Smooth transition */
+}
+
+.login-form-container .card-body {
+  flex: 1;
+}
+
+.login-form-container .login-image {
+  width: 100%;
+  max-width: 400px; /* Adjust the maximum width of the image */
+  object-fit: cover;
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+

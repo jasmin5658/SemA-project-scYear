@@ -19,7 +19,7 @@ export default function Form() {
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    if(product.id==0 || product.name=='' || product.shortDesc=='' || product.imag=='' || product.minQty==0 || product.currQty==0 || product.price==0){
+    if (product.id == 0 || product.name == '' || product.shortDesc == '' || product.imag == '' || product.minQty == 0 || product.currQty == 0 || product.price == 0) {
       alert("invalid info")
       return;
     }
@@ -28,35 +28,35 @@ export default function Form() {
 
   return (
     <>
-    <form onSubmit={handleSubmit}></form>
+      <form onSubmit={handleSubmit}></form>
       <div>
-<label>Id</label>
-<input type="number"
-onChange={(event)=>setProduct({...product,id:Number(event.target.value)})}/>
+        <label>Id</label>
+        <input type="number"
+          onChange={(event) => setProduct({ ...product, id: Number(event.target.value) })} />
       </div>
 
-    <div>
-<label>Name</label>
-<input type="text"
-onChange={(event)=>setProduct({...product,name:String(event.target.value)})}/>
+      <div>
+        <label>Name</label>
+        <input type="text"
+          onChange={(event) => setProduct({ ...product, name: String(event.target.value) })} />
       </div>
 
-    <div>
-<label>shortDesc</label>
-<input type="text"
-onChange={(event)=>setProduct({...product,shortDesc:String(event.target.value)})}/>
+      <div>
+        <label>shortDesc</label>
+        <input type="text"
+          onChange={(event) => setProduct({ ...product, shortDesc: String(event.target.value) })} />
       </div>
 
-    <div>
-<label>longDesc</label>
-<input type="text"
-onChange={(event)=>setProduct({...product,longDesc:String(event.target.value)})}/>
+      <div>
+        <label>longDesc</label>
+        <input type="text"
+          onChange={(event) => setProduct({ ...product, longDesc: String(event.target.value) })} />
       </div>
 
-    <div>
-<label>imag</label>
-<input type="text"
-onChange={(event)=>setProduct({...product,imag:String(event.target.value)})}/>
+      <div>
+        <label>imag</label>
+        <input type="text"
+          onChange={(event) => setProduct({ ...product, imag: String(event.target.value) })} />
       </div>
 
     </>

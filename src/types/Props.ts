@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 import { User } from "./User";
 import { UserHistoryPurchases } from "./UserHistoryPurchases";
 import { ProductPage } from "./ProductPage";
 
-export type ProductProps={
+export type Product={
     id: number;
     name: string;
     shortDesc: string;
@@ -32,11 +32,6 @@ export type UserHistoryPurchasesProps = {
     UserHistoryPurchases:Array<UserHistoryPurchases>
 }
 
-//?
-export type ShoppingCartProviderProps = {
-    children:ReactNode
-}
-
 export type ShoppingCartProps = {
     isOpen:boolean
 }
@@ -45,3 +40,9 @@ export type CartItemsProps = {
     id:number;
     quantity:number;
 }
+
+export type ShoppingCartProviderProps = {
+    children: ReactElement | ReactElement[]
+}
+
+

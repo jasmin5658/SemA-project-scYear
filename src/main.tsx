@@ -10,11 +10,11 @@ import { ShoppingCartProvider } from './context/ShoppingCartContext.tsx';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ShoppingCartProvider>
-    <UserProvider>
-      <ProductsProvider >
-        <RouterProvider router={routes} />
-      </ProductsProvider >
+      <UserProvider>
+        <ProductsProvider >
+          <RouterProvider router={routes} />
+        </ProductsProvider >
       </UserProvider>
-      </ShoppingCartProvider>
+    </ShoppingCartProvider>
   </React.StrictMode>
 )

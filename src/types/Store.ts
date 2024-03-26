@@ -36,3 +36,11 @@ export type Product = {
 export type ProductComp = {
     product:Product
 }
+
+export type productInCart = {
+  
+}
+
+export type cart ={
+  products:productInCart[]
+}

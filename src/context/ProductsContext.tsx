@@ -121,6 +121,28 @@ export default function ProductsProvider({ children }: any) {
       currQty: 0,
       price: 433,
       discount: 10
+    },
+    {
+      id: 6,
+      name: 'Yellow sorm',
+      shortDesc: 'shortDesc',
+      longDesc: 'longDesc',
+      imag: '../public/images/yellow.jpg',
+      minQty: 1,
+      currQty: 1,
+      price: 287,
+      discount: 0
+    },
+    {
+      id: 7,
+      name: 'forest',
+      shortDesc: 'shortDesc',
+      longDesc: 'longDesc',
+      imag: '../public/images/trees.jpg',
+      minQty: 1,
+      currQty: 1,
+      price: 524,
+      discount: 12 
     }
   ]);
 
