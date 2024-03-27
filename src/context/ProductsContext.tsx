@@ -1,4 +1,4 @@
-import  { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { Product } from "../types/Store";
 
 // Create the context
@@ -6,14 +6,14 @@ export const ProductsContext = createContext<any>({});
 export default function ProductsProvider({ children }: any) {
 
   const [products, setProducts] = useState<Product[]>([]);
-    
 
-   function loadProducts(): Product[] {
+
+  function loadProducts(): Product[] {
     let products = localStorage.getItem('products');
     if (products) //if(products !== undefined)
-        return JSON.parse(products) as Product[];
+      return JSON.parse(products) as Product[];
     return [];
-}
+  }
 
   // Load products from localStorage on initial component mount
   useEffect(() => {
@@ -62,7 +62,7 @@ export default function ProductsProvider({ children }: any) {
 
   useEffect(() => {
     let products = loadProducts();
-    if(products.length == 0) {
+    if (products.length == 0) {
       products = [
         {
           id: 1,
@@ -140,13 +140,14 @@ export default function ProductsProvider({ children }: any) {
           discount: 12
         }
       ];
+      setProducts(products); // <-- Set default products into state
+      localStorage.setItem('products', JSON.stringify(products)); // <-- Store default products in localStorage
     }
-  setProducts(products);
-}, []);
+  }, []);
 
-useEffect(() => {
-  localStorage.setItem('products', JSON.stringify(products));
-}, [products]);
+  useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(products));
+  }, [products]);
 
   // Render the provider with the provided value
   return (

@@ -9,7 +9,7 @@ import { ShoppingCartProvider } from './context/ShoppingCartContext.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ShoppingCartProvider>
+    <ShoppingCartProvider isOpen={false}>
       <UserProvider>
         <ProductsProvider >
           <RouterProvider router={routes} />

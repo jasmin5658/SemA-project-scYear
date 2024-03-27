@@ -26,8 +26,15 @@ export type UserHistoryPurchasesProps = {
     UserHistoryPurchases:Array<UserHistoryPurchases>
 }
 export type CartItemProps = {
-    id:number;
-    quantity:number;
+    id: number;
+    name: string;
+    shortDesc: string;
+    longDesc?: string;
+    imag: string;
+    minQty: number;
+    quantity: number;
+    price: number;
+    discount?: number;   
 }
 
 export type ShoppingCartProviderProps = {

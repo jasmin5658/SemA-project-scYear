@@ -5,13 +5,13 @@ import { useContext } from "react"; // Import useContext hook
 import { ProductsContext } from "../context/ProductsContext"; // Import ProductsContext
 import { Product } from "../types/Store"; // Import Product type
 
-export function CartItem({ id, quantity }: CartItemProps) {
+export function CartItem({ id, quantity, price, discount, imag, name, shortDesc, longDesc, minQty}: CartItemProps) {
     const { removeFromCart } = useShoppingCart();
     const productsContext = useContext(ProductsContext); // Use useContext hook to access ProductsContext
     const { products } = productsContext; // Destructure products from the context
 
     // Find the item in products array based on id
-    const item = products.find((product: Product) => product.id === id); // Explicitly specify 'product' as type Product
+    const item = products && products.find((product: Product) => product.id === id);
     if (!item) return null; // If item is not found, return null
 
     return (

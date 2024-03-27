@@ -11,6 +11,16 @@ export type Product = {
     price: number;
     discount?: number;   
 }
+
+export type ProductsContextType {
+  products: Product[];
+  addProduct: (item: Product) => void;
+  deleteProduct: (item: Product) => void;
+  updateStock: (productId: number, quantity: number) => void;
+  loadProducts: () => void;
+}
+
+
   
   // Interface for filtering products by price range
   export type PriceRange = {
