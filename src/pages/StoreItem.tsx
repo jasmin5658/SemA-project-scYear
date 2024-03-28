@@ -1,15 +1,15 @@
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import { StoreItemProps } from "../types/Props";
 import { Card, Button } from "react-bootstrap";
+import { formatCurrency } from "../types/formatCurrency";
 
-export default function StoreItem({ id, name, shortDesc, imag, currQty, price, discount }: 
-  StoreItemProps) 
-  {
-  const { getItemQuantity, 
+export default function StoreItem({ id, name, shortDesc, imag, currQty, price, discount }:
+  StoreItemProps) {
+  const { getItemQuantity,
     increaseCartQuantity,
-     decreaseCartQuantity,
-     removeFromCart} = useShoppingCart();
-     const quantity = getItemQuantity(id);
+    decreaseCartQuantity,
+    removeFromCart } = useShoppingCart();
+  const quantity = getItemQuantity(id);
   return (
     <Card className="h-100">
       <Card.Img
@@ -23,9 +23,9 @@ export default function StoreItem({ id, name, shortDesc, imag, currQty, price, d
          mb-4">
           <span className="fs-2" style={{ fontWeight: "bold" }}>{name}</span>
           <span className="ms-2" style={{ fontSize: "16px" }}>{shortDesc}</span>
-          <span className="ms-2" style={{ color: "blue", fontSize: "14px" }}> 
-          {currQty} in stock</span>
-          <span className="ms-2" style={{ fontSize: "15px" }}>{price}₪</span>
+          <span className="ms-2" style={{ color: "blue", fontSize: "14px" }}>
+            {currQty} in stock</span>
+          <span className="ms-2" style={{ fontSize: "15px" }}>{formatCurrency(price)}</span>
           <span className="ms-2 text-muted">{discount}%</span>
         </Card.Title>
         <div className="mt-auto">
@@ -40,7 +40,7 @@ export default function StoreItem({ id, name, shortDesc, imag, currQty, price, d
                 <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
                 <div>
                   <span className="fs-3">{quantity}</span> in
-                   cart
+                  cart
                 </div>
                 <Button onClick={() => increaseCartQuantity(id)}>+</Button>
               </div>

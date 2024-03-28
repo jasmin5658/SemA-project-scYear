@@ -4,9 +4,11 @@ import { CartItemProps } from "../types/Props";
 import { useContext } from "react"; // Import useContext hook
 import { ProductsContext } from "../context/ProductsContext"; // Import ProductsContext
 import { Product } from "../types/Store"; // Import Product type
+import { Button } from "react-bootstrap";
+import { formatCurrency } from "../types/formatCurrency";
 
 
-export function CartItem({ id, quantity}: CartItemProps) {
+export function CartItem({ id, quantity }: CartItemProps) {
     const { removeFromCart } = useShoppingCart();
     const productsContext = useContext(ProductsContext); // Use useContext hook to access ProductsContext
     const { products } = productsContext; // Destructure products from the context
@@ -26,13 +28,21 @@ export function CartItem({ id, quantity}: CartItemProps) {
                 <div>
                     {item.name}
                     {quantity > 1 && (
-                        <span className="text-muted" style={{ fontSize: "0.65rem" }}>
-                            {quantity}x{item.price}
+                        <span className="text-muted" style={{
+                            fontSize:
+                                "0.65rem"
+                        }}>
+                            X {quantity}
                         </span>
                     )}
                 </div>
+                <div className="text-muted" style={{fontSize:
+                "0.75rem" }}>
+                    {formatCurrency(item.price)}
+                </div>
             </div>
-            <div>₪ {item.price * quantity}</div>
-        </Stack>
-    );
+            <div>{formatCurrency(item.price * quantity)}</div>
+            <Button variant="outline-danger" size="sm"  onClick={() => removeFromCart(id)}>&times;</Button>
+            </Stack>
+    )
 }

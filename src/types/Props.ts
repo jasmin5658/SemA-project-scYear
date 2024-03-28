@@ -28,6 +28,7 @@ export type UserHistoryPurchasesProps = {
 export type CartItemProps = {
     id: number;
 quantity:number    
+updateProductStock: (productId: number, quantity: number) => void; // Add the updateProductStock prop
 }
 
 export type ShoppingCartProviderProps = {
