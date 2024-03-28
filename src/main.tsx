@@ -6,15 +6,16 @@ import ProductsProvider from './context/ProductsContext.tsx';
 import UserProvider from './context/UserContext.tsx';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ShoppingCartProvider } from './context/ShoppingCartContext.tsx';
+import UserContextProvider from './context/UserContext.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ShoppingCartProvider isOpen={false}>
-      <UserProvider>
+      <UserContextProvider>
+    <ShoppingCartProvider>
         <ProductsProvider >
           <RouterProvider router={routes} />
         </ProductsProvider >
-      </UserProvider>
     </ShoppingCartProvider>
+      </UserContextProvider>
   </React.StrictMode>
 )

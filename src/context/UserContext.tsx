@@ -1,12 +1,12 @@
-import React, { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { User } from "../types/User";
-
+import { UserContextProviderProps } from "../types/Props";
 // Create the user context
-export const UserContext = createContext<any>({});
+export const UserContext = createContext({});
 
 // UserProvider component
-export default function UserProvider({ children }: any) {
-  const [user, setUser] = useState<User[]>([{
+export default function UserContextProvider({ children }: UserContextProviderProps) {
+  const [users, setUsers] = useState<User[]>([{
     email: "",
     Fname: "",
     Lname: "",
@@ -14,7 +14,7 @@ export default function UserProvider({ children }: any) {
     image: "",
     birthDate: new Date(),
     password: "",
-    isActive: false,
+    isActive: true,
     address: {
         city: "",
         street: "",
@@ -40,12 +40,12 @@ export default function UserProvider({ children }: any) {
     // Fetch user data or load from localStorage
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      setUsers(JSON.parse(storedUser));
     }
   }, []);
 
   const value = {
-    user,
+    users,
   };
 
   return (

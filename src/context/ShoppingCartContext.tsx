@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { ShoppingCartProviderProps } from "../types/Props";
 import { CartItem } from "../types/CartItem";
-import ShoppingCart from "../components/ShoppingCart";
 
 type ShoppingCartContext = {
   openCart: () => void
@@ -12,6 +11,7 @@ type ShoppingCartContext = {
   removeFromCart: (id: number) => void
   cartQuantity: number
   cartItems: CartItem[]
+  isOpen: boolean
 }
 
 
@@ -90,10 +90,10 @@ export function ShoppingCartProvider({ children }:
         closeCart,
         cartItems,
         cartQuantity,
+        isOpen
       }}
     >
       {children}
-      <ShoppingCart isOpen={isOpen} children={undefined}/>
     </ShoppingCartContext.Provider>
 
   )

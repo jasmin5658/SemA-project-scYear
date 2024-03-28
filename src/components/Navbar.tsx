@@ -1,11 +1,13 @@
 import { Container, Navbar as NavbarBs, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useShoppingCart } from "../context/ShoppingCartContext";
+import ShoppingCart from "./ShoppingCart";
 
 export default function Navbar() {
 
   const { openCart, cartQuantity } = useShoppingCart();
   return (
+    <>
     <NavbarBs sticky="top" className="bg-white shadow-sm mb-1">
       <Container>
         {/* Logo */}
@@ -78,5 +80,8 @@ export default function Navbar() {
         )}
       </Container>
     </NavbarBs>
+    <ShoppingCart/>
+</>
+
   );
 }

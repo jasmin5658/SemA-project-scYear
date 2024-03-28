@@ -7,6 +7,10 @@ import Footer from "../pages/Footer";
 import Login from "../pages/Login";
 import NotFound from "../pages/notFound";
 import Register from "../pages/Register";
+import Admin from "../pages/Admin";
+import Profile from "../pages/Profile";
+
+
 
 export const routes = createBrowserRouter([
     {
@@ -19,7 +23,7 @@ export const routes = createBrowserRouter([
     },
     {
         path: '/store',
-        element:    <Store />
+        element: <Store />
     },
     {
         path: '/contact',
@@ -31,7 +35,7 @@ export const routes = createBrowserRouter([
     },
     {
         path: '/register',
-        element: <Register/>
+        element: <Register />
     },
     {
         path: '/footer',
@@ -39,5 +43,14 @@ export const routes = createBrowserRouter([
     },
     {
         path: '/*',
-        element: <NotFound />}
+        element: <NotFound />
+    },
+    {
+        path: '/Admin',
+        element: <Admin />
+    },
+    {
+        path: '/profile',
+        element: <Profile />
+    }
 ]);

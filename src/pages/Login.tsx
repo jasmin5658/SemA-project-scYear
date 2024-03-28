@@ -1,108 +1,62 @@
-import React, { useContext, useState } from 'react';
-import "../styles/styles.css"
-import { Link } from 'react-router-dom';
+import * as Yup from 'yup'
+import { useFormik } from "formik";
 import Navbar from "../components/Navbar";
-import UserContext from '../context/UserContext';
+import { useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
-interface FormData {
-  email: string;
-  password: string;
-}
 
-const Login: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({ email: '', password: '' });
+export default function Login() {
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const navigate = useNavigate()
+  const { users, setCurrentUser } = useContext<any>(UserContext)
 
-  const handleLogin = () => {
-    // Perform validation on formData
-    if (formData.email.trim() === '' || formData.password.trim() === '') {
-      alert('Please fill in all fields');
-      return;
+  const loginValidation = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().required('Email is required').email('Invalid email address'),
+      password: Yup.string().min(6, 'Password must be 6 characters long').max(20, 'Password must be 20 characters long').required('Password is required'),
+    }),
+    onSubmit: (values) => {
+      console.log('values', values);
+      if (values.email === 'admin@admin.com' && values.password === '123456789')
+        navigate('/admin')
+      else {
+        let user = users.find((u) => u.email === values.email && u.password === values.password)
+        if (user) {
+          setCurrentUser(user);
+          navigate('/profile')
+        }
+        else
+          navigate('/')
+      }
+
     }
-    // Trigger loginClient action
-    // Example: loginClient(formData);
-  };
+  })
+
 
   return (
     <>
       <Navbar />
-      <section className="text-center text-lg-start">
-        <div className="card mb-3">
-          <div className="row g-0 d-flex align-items-center">
-            <div className="col-lg-4 d-none d-lg-flex">
-              <img
-                src="../Images/login.jpg"
-                alt="login"
-                className="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5"
-              />
-            </div>
-            <div className="col-lg-8">
-              <div className="card-body py-5 px-md-5">
-                <form>
-                  <div className="form-outline mb-4">
-                    <input
-                      type="email"
-                      id="form2Example1"
-                      className="form-control"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
-                    <label className="form-label" htmlFor="form2Example1">
-                      Email address
-                    </label>
-                  </div>
-
-                  <div className="form-outline mb-4">
-                    <input
-                      type="password"
-                      id="form2Example2"
-                      className="form-control"
-                      name="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                    />
-                    <label className="form-label" htmlFor="form2Example2">
-                      Password
-                    </label>
-                  </div>
-
-                  <div className="row mb-4">
-                    <div className="col d-flex justify-content-center">
-                      <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                        <label className="form-check-label" htmlFor="form2Example31">
-                          {' '}
-                          Remember me{' '}
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className="col">
-                      <p>Not a member?</p>
-                      <Link to="/register"> {/* Navigation to register page */}
-                        <button type="button" className="btn btn-primary btn-block mb-4">
-                          Register
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-
-                  <button type="button" className="btn btn-primary btn-block mb-4" onClick={handleLogin}>
-                    Sign in
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
+      <form onSubmit={loginValidation.handleSubmit}>
+        <div className="input-holder">
+          <label htmlFor="email">Email</label>
+          <input type="text" id='email' value={loginValidation.values.email}
+            onChange={loginValidation.handleChange} />
         </div>
-      </section>
-    </>
-  );
-};
+        <div className="input-holder">
+          <label htmlFor="password">Password</label>
+          <input type="password" id='password' value={loginValidation.values.password}
+            onChange={loginValidation.handleChange} />
+        </div>
+        <div className="input-holder">
+          <button type="submit">Login</button>
+        </div>
 
-export default Login;
+      </form>
+    </>
+  )
+}

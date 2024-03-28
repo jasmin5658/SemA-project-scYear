@@ -1,4 +1,4 @@
-import {  ReactNode } from "react";
+import {  ReactElement, ReactNode } from "react";
 import { User } from "./User";
 import { UserHistoryPurchases } from "./UserHistoryPurchases";
 
@@ -27,20 +27,19 @@ export type UserHistoryPurchasesProps = {
 }
 export type CartItemProps = {
     id: number;
-    name: string;
-    shortDesc: string;
-    longDesc?: string;
-    imag: string;
-    minQty: number;
-    quantity: number;
-    price: number;
-    discount?: number;   
+quantity:number    
 }
 
 export type ShoppingCartProviderProps = {
     children: ReactNode
-    isOpen:boolean
+}
 
+export type ShoppingCartProps = { 
+    isOpen:boolean
+}
+
+export type UserContextProviderProps = {
+    children: ReactElement | ReactElement[]
 }
 
 
