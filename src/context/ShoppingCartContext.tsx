@@ -1,42 +1,46 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { ShoppingCartProviderProps } from "../types/Props";
 import { CartItem } from "../types/CartItem";
 
 type ShoppingCartContext = {
-  openCart: () => void
-  closeCart: () => void
-  getItemQuantity: (id: number) => number
-  increaseCartQuantity: (id: number) => void
-  decreaseCartQuantity: (id: number) => void
-  removeFromCart: (id: number) => void
-  cartQuantity: number
-  cartItems: CartItem[]
-  isOpen: boolean
-}
+  openCart: () => void;
+  closeCart: () => void;
+  getItemQuantity: (id: number) => number;
+  increaseCartQuantity: (id: number) => void;
+  decreaseCartQuantity: (id: number) => void;
+  removeFromCart: (id: number) => void;
+  cartQuantity: number;
+  cartItems: CartItem[];
+  isOpen: boolean;
+};
 
+const localStorageKey = "shoppingCart"; 
 
-const ShoppingCartContext = createContext({} as
-  ShoppingCartContext)
+const initialCartItems =
+  localStorage.getItem(localStorageKey) !== null
+    ? JSON.parse(localStorage.getItem(localStorageKey)!)
+    : []; // Initialize with empty array if no cart data exists
+
+const ShoppingCartContext = createContext({} as ShoppingCartContext);
 
 export function useShoppingCart() {
   return useContext(ShoppingCartContext);
 }
 
-export function ShoppingCartProvider({ children }:
-  ShoppingCartProviderProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
+export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
 
   const cartQuantity = cartItems.reduce(
-    (quantity, item) => item.quantity + quantity
-    , 0
-  )
+    (quantity, item) => item.quantity + quantity,
+    0
+  );
 
-  const openCart = () => setIsOpen(true)
-  const closeCart = () => setIsOpen(false)
+  const openCart = () => setIsOpen(true);
+  const closeCart = () => setIsOpen(false);
 
   function getItemQuantity(id: number) {
-    return cartItems.find(item => item.id === id)?.quantity || 0
+    return cartItems.find(item => item.id === id)?.quantity || 0;
   }
 
   function increaseCartQuantity(id: number) {
@@ -55,7 +59,6 @@ export function ShoppingCartProvider({ children }:
     });
   }
 
-
   function decreaseCartQuantity(id: number) {
     setCartItems(currItems => {
       if (currItems.find(item => item.id === id)?.quantity === 1) {
@@ -73,10 +76,13 @@ export function ShoppingCartProvider({ children }:
   }
 
   function removeFromCart(id: number) {
-    setCartItems(currItems => {
-      return currItems.filter(item => item.id !== id);
-    });
+    setCartItems(currItems => currItems.filter(item => item.id !== id));
   }
+
+  // Persist cart items to localStorage on cart changes
+  useEffect(() => {
+    localStorage.setItem(localStorageKey, JSON.stringify(cartItems));
+  }, [cartItems]);
 
 
   return (
@@ -90,13 +96,10 @@ export function ShoppingCartProvider({ children }:
         closeCart,
         cartItems,
         cartQuantity,
-        isOpen
+        isOpen,
       }}
     >
       {children}
     </ShoppingCartContext.Provider>
-
-  )
+  );
 }
-
-

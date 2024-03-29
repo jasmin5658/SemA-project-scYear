@@ -8,14 +8,14 @@ export default function Admin() {
 
     const productSchema: Yup.ObjectSchema<Product> = Yup.object({
         id: Yup.number().min(0, 'Id must be geater than 0').required('please enter a valid Id num'),
-        name: Yup.string().required('required message'),
-        shortDesc: Yup.string().required('required message'),
-        longDesc: Yup.string().required('required message'),
-        imag: Yup.string().required('required message'),
-        minQty: Yup.number().min(0, 'error message').required('required message'),
-        currQty: Yup.number().min(0, 'error message').required('required message'),
+        name: Yup.string().required('Please enter a valid name'),
+        shortDesc: Yup.string().required('Please enter a short description'),
+        longDesc: Yup.string(),
+        imag: Yup.string().required('please enter a valid image url'),
+        minQty: Yup.number().min(0, 'error message').required('Please enter a valid quantity'),
+        currQty: Yup.number().min(0, 'error message').required('Please enter a valid quantity'),
         price: Yup.number().min(0, 'price must be geater than 0').required('please enter a valid price'),
-        discount: Yup.number().min(0, 'sale price must be geater than 0').max(100, 'sale price must be less than price').required('required message'),
+        discount: Yup.number().min(0, 'sale price must be geater than 0').max(100, 'sale price must be less than price').required('Please enter a valid sale price'),
     })
 
     const formValidation = useFormik<Product>({
