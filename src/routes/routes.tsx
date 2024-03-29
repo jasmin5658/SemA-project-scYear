@@ -26,10 +26,6 @@ export const routes = createBrowserRouter([
         element: <Store />
     },
     {
-        path: '/contact',
-        element: <Contact />
-    },
-    {
         path: '/login',
         element: <Login />
     },
@@ -52,5 +48,6 @@ export const routes = createBrowserRouter([
     {
         path: '/profile',
         element: <Profile />
-    }
+    },
+
 ]);

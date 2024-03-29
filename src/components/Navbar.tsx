@@ -5,10 +5,11 @@ import ShoppingCart from "./ShoppingCart";
 
 export default function Navbar() {
 
+  
   const { openCart, cartQuantity } = useShoppingCart();
   return (
     <>
-    <NavbarBs sticky="top" className="bg-white shadow-sm mb-1">
+    <NavbarBs sticky="top"  className="bg-white shadow-sm mb-1" >
       <Container>
         {/* Logo */}
         <Link to="/">
@@ -27,7 +28,6 @@ export default function Navbar() {
         <Link to="/">Home</Link>
         <Link to="/about">about</Link>
         <Link to="/store">Store</Link>
-        <Link to="/contact">contact</Link>
 
         {/* Login Button */}
         <Link to="/login">

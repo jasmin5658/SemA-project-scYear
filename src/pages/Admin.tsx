@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { Product } from "../types/Store";
 import { Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
+import Navbar from "../components/Navbar";
+import Footer from "./Footer";
 
 export default function Admin() {
-    // const {addProduct} = useContext(ProductsContext)
-
     const productSchema: Yup.ObjectSchema<Product> = Yup.object({
         id: Yup.number().min(0, 'Id must be geater than 0').required('please enter a valid Id num'),
         name: Yup.string().required('Please enter a valid name'),
@@ -38,6 +38,7 @@ export default function Admin() {
 
     return (
         <>
+            <Navbar />
             <h1>Admin</h1>
             <form onSubmit={formValidation.handleSubmit}>
                 <div className="input-holder">
@@ -122,6 +123,7 @@ export default function Admin() {
                 </div>
                 <button type="submit">Add</button>
             </form>
+            <Footer />
         </>
     )
 }
