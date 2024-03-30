@@ -1,10 +1,11 @@
-import { Offcanvas, Stack } from 'react-bootstrap';
+import { Button, Offcanvas, Stack } from 'react-bootstrap';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 import { CartItem } from './CartItem';
 import { formatCurrency } from '../types/formatCurrency';
 import { Product } from '../types/Store';
 import { useContext, useEffect, useState } from 'react'; // Import useContext hook
 import { ProductsContext } from '../context/ProductsContext'; // Import ProductsContext
+import PaymentPage from '../pages/payment'; // Import PaymentPage component
 
 export default function ShoppingCart() {
     const { closeCart, cartItems, isOpen } = useShoppingCart();
@@ -37,8 +38,8 @@ export default function ShoppingCart() {
             });
             setPersistedProducts(updatedProducts);
             localStorage.setItem('products', JSON.stringify(updatedProducts));
-        }    
-    }
+        }
+    };
 
     return (
         <Offcanvas show={isOpen} onHide={closeCart} placement='end'>
@@ -51,14 +52,17 @@ export default function ShoppingCart() {
                         <CartItem key={item.id} {...item} updateProductStock={updateProductStock} />
                     ))}
                     <div className="ms-auto fw-bold fs-5">
-                        Total
-                        {formatCurrency(
+                        Total: {formatCurrency(
                             cartItems.reduce((total, cartItem) => {
                                 const item = products && products.find((product: Product) => product.id === cartItem.id);
                                 return total + (item?.price || 0) * cartItem.quantity;
                             }, 0)
                         )}
                     </div>
+                    <Button variant="primary" size="lg" href="/payment">
+                        Checkout
+                    </Button>
+
                 </Stack>
             </Offcanvas.Body>
         </Offcanvas>

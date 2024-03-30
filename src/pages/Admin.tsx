@@ -3,7 +3,7 @@ import { Product } from "../types/Store";
 import { Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
 import Navbar from "../components/Navbar";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 
 export default function Admin() {
     const productSchema: Yup.ObjectSchema<Product> = Yup.object({

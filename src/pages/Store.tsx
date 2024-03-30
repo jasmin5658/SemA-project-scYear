@@ -4,7 +4,7 @@ import { ProductsContext } from "../context/ProductsContext";
 import { Row, Col } from "react-bootstrap";
 import StoreItem from "../pages/StoreItem";
 import { StoreItemProps } from "../types/Props";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 
 export default function Store() {
   const { products } = useContext<any>(ProductsContext);
@@ -19,7 +19,7 @@ export default function Store() {
           </Col>
         ))}
       </Row>
-      <Footer/>
+      <Footer />
     </>
   );
 }
