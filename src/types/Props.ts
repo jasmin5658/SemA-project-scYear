@@ -1,5 +1,5 @@
 import {  ReactElement, ReactNode } from "react";
-import { User } from "./User";
+import { User } from "./CustomerProfile";
 import { UserHistoryPurchases } from "./UserHistoryPurchases";
 
 export type StoreItemProps={
@@ -43,4 +43,17 @@ export type UserContextProviderProps = {
     children: ReactElement | ReactElement[]
 }
 
+export type ProductsContextProviderProps={
+    id: number;
+    name: string;
+    shortDesc: string;
+    longDesc?: string;
+    imag: string;
+    minQty: number;
+    currQty: number;
+    price: number;
+    discount?: number;   
+    
+    children: React.ReactNode;
+}
 

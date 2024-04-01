@@ -1,0 +1,18 @@
+.container {
+    background-color: #def1c7; /* White background color */
+    padding: 1rem; /* Add some padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2px;   
+    }

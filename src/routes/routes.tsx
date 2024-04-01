@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import About from "../pages/About";
-import Contact from "../pages/Contact";
 import Home from "../pages/Home";
 import Store from "../pages/Store";
 import Footer from "../components/Footer";
@@ -10,6 +9,7 @@ import Register from "../pages/Register";
 import Admin from "../pages/Admin";
 import Profile from "../pages/Profile";
 import PaymentPage from "../pages/payment";
+import CustomerProfile from "../pages/Profile";
 
 
 
@@ -47,12 +47,17 @@ export const routes = createBrowserRouter([
         element: <Admin />
     },
     {
+        path: '/CustomerProfile',
+        element: <CustomerProfile />
+    },
+    {
         path: '/profile',
         element: <Profile />
     },
     {
         path: '/payment',
         element: <PaymentPage/>
-    }
+    },
+    
 
 ]);

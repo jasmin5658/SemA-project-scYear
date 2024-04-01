@@ -1,17 +1,37 @@
 import { createContext, useState, useEffect } from "react";
 import { Product } from "../types/Store";
+import { ProductsContextProviderProps } from "../types/Props";
 
-// Create the context
-export const ProductsContext = createContext<any>({});
-export default function ProductsProvider({ children }: any) {
+// Define interface for context value
+interface ProductsContextValue {
+  products: Product[];
+  addProduct: (item: Product) => void;
+  deleteProduct: (item: Product) => void;
+  updateStock: (productId: number, quantity: number) => void;
+  loadProducts: () => Product[];
+}
 
+// Create the context with the defined interface
+export const ProductsContext = createContext<ProductsContextValue>({
+  products: [],
+  addProduct: () => { },
+  deleteProduct: () => { },
+  updateStock: () => { },
+  loadProducts: () => [],
+});
+
+export default function ({ children }: ProductsContextProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
-
 
   function loadProducts(): Product[] {
     let products = localStorage.getItem('products');
-    if (products) //if(products !== undefined)
-      return JSON.parse(products) as Product[];
+    if (products) {
+      try {
+        return JSON.parse(products) as Product[];
+      } catch (error) {
+        console.error('Error parsing products from localStorage:', error);
+      }
+    }
     return [];
   }
 
@@ -19,7 +39,7 @@ export default function ProductsProvider({ children }: any) {
   useEffect(() => {
     const storedProducts = localStorage.getItem('products');
     if (storedProducts) {
-      setProducts(JSON.parse(storedProducts));
+      setProducts(JSON.parse(storedProducts) as Product[]);
     }
   }, []);
 
@@ -29,6 +49,9 @@ export default function ProductsProvider({ children }: any) {
       const updatedProducts = [...products, item];
       setProducts(updatedProducts);
       localStorage.setItem('products', JSON.stringify(updatedProducts));
+    }
+    else {
+      alert('Product already exists in cart');
     }
   }
 
@@ -220,14 +243,14 @@ export default function ProductsProvider({ children }: any) {
           discount: 8
         },
         {
-        id: 16,
-        name: 'Blue storm',
-        shortDesc: 'oil colors',
-        imag: '../public/images/blue.jpg',
-        minQty: 1,
-        currQty: 0,
-        price: 202.90,
-        discount: 10
+          id: 16,
+          name: 'Blue storm',
+          shortDesc: 'oil colors',
+          imag: '../public/images/blue.jpg',
+          minQty: 1,
+          currQty: 0,
+          price: 202.90,
+          discount: 10
         },
       ];
       setProducts(products); // <-- Set default products into state
@@ -245,4 +268,7 @@ export default function ProductsProvider({ children }: any) {
       {children}
     </ProductsContext.Provider>
   );
+
+
+
 }

@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
+import { User } from '../types/CustomerProfile';
 
 
 export default function Login() {
@@ -22,22 +23,29 @@ export default function Login() {
     }),
     onSubmit: (values) => {
       console.log('values', values);
-      if (values.email === 'admin@admin.com' && values.password === '123456789')
-        navigate('/admin')
-      else {
-        let user = users.find((u) => u.email === values.email && u.password === values.password)
-        if (user) {
-          setCurrentUser(user);
-          navigate('/profile')
-        }
-        else
-          navigate('/')
+
+      // Admin check
+      if (values.email === 'admin@admin.com' && values.password === '123456789') {
+        navigate('/admin');
+        return;
       }
 
-    }
-  })
+      //בדיקה זמנית 
+      // User check
+      // if (values.email === 'kouzlyjasmin@gmail.com' && values.password === '123456') {
+      //   navigate('/profle');
+      //   return;
 
-
+      const user = users.find((u: User) => u.email === values.email && u.password === values.password);
+      if (user) {
+        setCurrentUser(user);
+        navigate('/profile');
+      } else {
+        alert('Invalid email or password');
+      }
+    },
+  }
+  )
   return (
     <>
       <Navbar />
@@ -55,8 +63,11 @@ export default function Login() {
         <div className="input-holder">
           <button type="submit">Login</button>
         </div>
-
+        <div className="input-holder">
+          <a href="/register">Don't have an account?</a>
+        </div>
       </form>
+
     </>
   )
 }

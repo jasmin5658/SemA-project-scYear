@@ -1,5 +1,3 @@
-
-// Interface for a product
 export type Product = {
     id: number;
     name: string;
@@ -12,7 +10,7 @@ export type Product = {
     discount?: number;   
 }
 
-export type ProductsContextType {
+export type ProductsContextType ={
   products: Product[];
   addProduct: (item: Product) => void;
   deleteProduct: (item: Product) => void;

@@ -1,28 +1,37 @@
-import { useContext } from "react";
-import { Product } from "../types/Store";
-import { Formik, useFormik } from 'formik';
+import { useState, useContext, useEffect } from 'react';
+import ReactModal from 'react-modal';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { Link } from 'react-router-dom';
+import "../styles/styles.css";
+import { ProductsContext } from '../context/ProductsContext'; // Import the context value directly
 
 export default function Admin() {
-    const productSchema: Yup.ObjectSchema<Product> = Yup.object({
-        id: Yup.number().min(0, 'Id must be geater than 0').required('please enter a valid Id num'),
+    const [products, setProducts] = useState([]);
+
+    const { addProduct } = useContext(ProductsContext);
+
+    const [showPopup, setShowPopup] = useState(false);
+
+    const productSchema = Yup.object({
+        id: Yup.number().min(0, 'ID must be greater than 0').required('Please enter a valid ID number'),
         name: Yup.string().required('Please enter a valid name'),
         shortDesc: Yup.string().required('Please enter a short description'),
         longDesc: Yup.string(),
-        imag: Yup.string().required('please enter a valid image url'),
-        minQty: Yup.number().min(0, 'error message').required('Please enter a valid quantity'),
-        currQty: Yup.number().min(0, 'error message').required('Please enter a valid quantity'),
-        price: Yup.number().min(0, 'price must be geater than 0').required('please enter a valid price'),
-        discount: Yup.number().min(0, 'sale price must be geater than 0').max(100, 'sale price must be less than price').required('Please enter a valid sale price'),
-    })
+        imag: Yup.string().required('Please enter a valid image URL'),
+        minQty: Yup.number().min(0, 'Min quantity must be greater than or equal to 0').required('Please enter a valid quantity'),
+        currQty: Yup.number().min(0, 'Current quantity must be greater than or equal to 0').required('Please enter a valid quantity'),
+        price: Yup.number().min(0, 'Price must be greater than 0').required('Please enter a valid price'),
+        discount: Yup.number().min(0, 'Discount must be greater than or equal to 0').max(100, 'Discount must be less than or equal to 100').required('Please enter a valid discount'),
+    });
 
-    const formValidation = useFormik<Product>({
+
+    const formValidation = useFormik({
         initialValues: {
             id: 0,
             name: "",
-            shortDesc: "string",
+            shortDesc: "",
             longDesc: "",
             imag: "",
             minQty: 0,
@@ -32,85 +41,127 @@ export default function Admin() {
         },
         validationSchema: productSchema,
         onSubmit: (values) => {
-            console.log(values);
+            addProduct(values);
+            setShowPopup(true);
+            localStorage.setItem('products', JSON.stringify([...products, values]));
+            console.log('values', values);
         },
     });
 
     return (
         <>
-            <Navbar />
             <h1>Admin</h1>
             <form onSubmit={formValidation.handleSubmit}>
                 <div className="input-holder">
                     <label htmlFor="id">ID</label>
-                    <input id="id" type="number"
+                    <input
+                        id="id"
+                        type="number"
                         value={formValidation.values.id}
                         onChange={formValidation.handleChange}
-                        onBlur={formValidation.handleBlur} />
-                    {formValidation.errors.id && formValidation.touched.id ? <p style={{ color: "red" }}>{formValidation.errors.id}</p> : null}
+                        onBlur={formValidation.handleBlur}
+                    />
+                    {formValidation.errors.id && formValidation.touched.id ? (
+                        <p className='error'>{formValidation.errors.id}</p>
+                    ) : null}
                 </div>
                 <div className="input-holder">
                     <label htmlFor="name">Name</label>
-                    <input id="name" type="text" maxLength={60}
+                    <input
+                        id="name"
+                        type="text" maxLength={60}
                         value={formValidation.values.name}
                         onChange={formValidation.handleChange}
                         onBlur={formValidation.handleBlur}
                     />
-                    {formValidation.errors.name && formValidation.touched.name ? <p style={{ color: "red" }}>{formValidation.errors.name}</p> : null}
+                    {formValidation.errors.name && formValidation.touched.name ? (
+                        <p className='error'>{formValidation.errors.name}</p>
+                    ) : null}
                 </div>
                 <div className="input-holder">
                     <label htmlFor="shortDesc">Short Description</label>
-                    <input id="shortDesc" type="text" maxLength={60}
+                    <input
+                        id="shortDesc"
+                        type="text"
                         value={formValidation.values.shortDesc}
                         onChange={formValidation.handleChange}
                         onBlur={formValidation.handleBlur}
                     />
-                    {formValidation.errors.shortDesc && formValidation.touched.shortDesc ? <p style={{ color: "red" }}>{formValidation.errors.shortDesc}</p> : null}
+                    {formValidation.errors.shortDesc && formValidation.touched.shortDesc ? (
+                        <p className='error'>{formValidation.errors.shortDesc}</p>
+                    ) : null}
                 </div>
                 <div className="input-holder">
                     <label htmlFor="longDesc">Long Description</label>
-                    <input id="longDesc" type="text" maxLength={60}
+                    <input
+                        id="longDesc"
+                        type="text"
                         value={formValidation.values.longDesc}
                         onChange={formValidation.handleChange}
                         onBlur={formValidation.handleBlur}
                     />
-                    {formValidation.errors.longDesc && formValidation.touched.longDesc ? <p style={{ color: "red" }}>{formValidation.errors.longDesc}</p> : null}
+                    {formValidation.errors.longDesc && formValidation.touched.longDesc ? (
+                        <p className='error'>{formValidation.errors.longDesc}</p>
+                    ) : null}
                 </div>
                 <div className="input-holder">
                     <label htmlFor="imag">Image</label>
-                    <input id="imag" type="text" maxLength={60}
+                    <input
+
+                        id="imag"
+                        type="text"
                         value={formValidation.values.imag}
                         onChange={formValidation.handleChange}
                         onBlur={formValidation.handleBlur}
                     />
-                    {formValidation.errors.imag && formValidation.touched.imag ? <p style={{ color: "red" }}>{formValidation.errors.imag}</p> : null}
+                    {formValidation.errors.imag && formValidation.touched.imag ? (
+
+<p className='error'>{formValidation.errors.imag}</p>
+                    ) : null}
                 </div>
                 <div className="input-holder">
                     <label htmlFor="minQty">Min Quantity</label>
-                    <input id="minQty" type="number"
+                    <input
+
+                        id="minQty"
+                        type="number"
                         value={formValidation.values.minQty}
                         onChange={formValidation.handleChange}
                         onBlur={formValidation.handleBlur}
                     />
-                    {formValidation.errors.minQty && formValidation.touched.minQty ? <p style={{ color: "red" }}>{formValidation.errors.minQty}</p> : null}
+                    {formValidation.errors.minQty && formValidation.touched.minQty ? (
+                        <p className='error'>{formValidation.errors.minQty}</p>
+                    ) : null}
                 </div>
                 <div className="input-holder">
                     <label htmlFor="currQty">Current Quantity</label>
-                    <input id="currQty" type="number"
+                    <input
+
+                        id="currQty"
+                        type="number"
                         value={formValidation.values.currQty}
                         onChange={formValidation.handleChange}
                         onBlur={formValidation.handleBlur}
                     />
-                    {formValidation.errors.currQty && formValidation.touched.currQty ? <p style={{ color: "red" }}>{formValidation.errors.currQty}</p> : null}
+                    {formValidation.errors.currQty && formValidation.touched.currQty ? (
+
+<p className='error'>{formValidation.errors.currQty}</p>
+                    ) : null}
                 </div>
                 <div className="input-holder">
                     <label htmlFor="price">Price</label>
-                    <input id="price" type="number"
+                    <input
+
+                        id="price"
+                        type="number"
                         value={formValidation.values.price}
                         onChange={formValidation.handleChange}
                         onBlur={formValidation.handleBlur}
                     />
-                    {formValidation.errors.price && formValidation.touched.price ? <p style={{ color: "red" }}>{formValidation.errors.price}</p> : null}
+                    {formValidation.errors.price && formValidation.touched.price ? (
+
+                        <p className='error'>{formValidation.errors.price}</p>
+                    ) : null}
                 </div>
                 <div className="input-holder">
                     <label htmlFor="discount">Discount</label>
@@ -119,11 +170,45 @@ export default function Admin() {
                         onChange={formValidation.handleChange}
                         onBlur={formValidation.handleBlur}
                     />
-                    {formValidation.errors.discount && formValidation.touched.discount ? <p style={{ color: "red" }}>{formValidation.errors.discount}</p> : null}
+                    {formValidation.errors.discount && formValidation.touched.discount ? (
+                        <p className='error'>{formValidation.errors.discount}</p>
+                    ) : null}
                 </div>
+
+
+
                 <button type="submit">Add</button>
             </form>
             <Footer />
+            {/* Popup Modal */}
+            <ReactModal
+                isOpen={showPopup}
+                onRequestClose={() => setShowPopup(false)}
+                className="popup-modal"
+                style={{
+                    overlay: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.75)', // Semi-transparent black overlay
+                    },
+                    content: {
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        backgroundColor: '#fff',
+                        padding: '20px',
+                        border: '1px solid #ccc',
+                        borderRadius: '5px', // Rounded corners
+                    },
+                }}
+            >
+                <div className="popup-content">
+                    <p style={{ color: 'green', fontSize: '18px', fontWeight: 'bold' }}>
+                        Your product has been added successfully!
+
+                    </p>
+                    <Link to="/store">Go to Store</Link> {/* Link to navigate to the store page */}
+                </div>
+            </ReactModal >
         </>
-    )
+    );
 }

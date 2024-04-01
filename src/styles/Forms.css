@@ -1,0 +1,35 @@
+/* Styling for the form container */
+.input-holder {
+    margin-bottom: 15px;
+  }
+  
+  /* Styling for labels */
+  .label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Styling for input fields */
+  .input-field {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #007bff; /* Highlight focused fields */
+  }
+  
+  /* Styling for error messages */
+  .error {    
+    color: red;
+    font-size: 0.8em;
+    font-weight: bold;
+    font-style:initial;
+    margin-bottom: 5px;
+    margin-top: 2px;
+  }
+  
