@@ -1,5 +1,4 @@
 .navbar {
-  border-radius: 10px; /* Removed quotes from border-radius value */
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
@@ -8,6 +7,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
+  background-color: #cabfa539;
+
   background-color: #cabfa56f;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: sticky;
@@ -142,7 +143,7 @@
 
 /* Media Queries for Responsive Design */
 
-@media (max-width: 768px) {
+@media (max-width: 414px) {
   .navbar {
     flex-direction: row; /* Keep items in row for small screens */
     justify-content: space-between; /* Align items */
@@ -165,7 +166,6 @@
 
   .hamburger {
     display: block;
-    margin-left: 10rem; /* Adjusted margin for hamburger menu */
     margin-right: 0rem;
   }
 
@@ -173,12 +173,12 @@
     display: none;
     position: fixed;
     top: 0;
-    right: 0;
+    right: 1rem;
     bottom: 0;
     background: #ffffff;
     width: 70%; /* Adjust width of slide menu */
-    padding: 2rem;
-    z-index: 9;
+    padding: 1rem;
+    padding-top: 0rem;
     flex-direction: column;
   }
 
@@ -187,18 +187,18 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-top: 6rem;
+    margin-top: 9.5rem;
     margin-bottom: 0;
     padding-top: 0rem;
-    padding-left: 20rem;
+    padding-left: 10rem;
     padding-bottom: 1rem;
     border-radius: 10px;
     background-color: #f3ede1;
-    box-shadow: 0 2px 4px rgb(47, 32, 14);
+    box-shadow: 0 2px 4px rgb(0, 0, 0);
     color: #333;
     font-weight: bold;
     font-size: 1.5rem;
-    line-height: 7.5rem;
+    line-height: 7rem;
     transition: all 0.3s ease-in-out;
   }
 

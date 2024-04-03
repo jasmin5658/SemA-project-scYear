@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import { CustomerProfile } from '../types/CustomerProfile';
-
+import "../styles/login.css"; // Import the CSS file
+import Footer from '../components/Footer';
 
 export default function Login() {
-
-  const navigate = useNavigate()
-  const { users, setCurrentUser } = useContext<any>(UserContext)
+  const navigate = useNavigate();
+  const { users, setCurrentUser } = useContext<any>(UserContext);
 
   const loginValidation = useFormik({
     initialValues: {
@@ -30,13 +30,6 @@ export default function Login() {
         return;
       }
 
-      // בדיקה זמנית 
-      // User check
-    //   if (values.email === 'kouzlyjasmin@gmail.com' && values.password === '123456') {
-    //     navigate('/profle');
-    //     return;
-    // }
-
       const user = users.find((u: CustomerProfile) => u.email === values.email && u.password === values.password);
       if (user) {
         setCurrentUser(user);
@@ -48,28 +41,37 @@ export default function Login() {
       }
     }
   });
+
   return (
     <>
       <Navbar />
-      <form onSubmit={loginValidation.handleSubmit}>
-        <div className="input-holder">
-          <label htmlFor="email">Email</label>
-          <input type="text" id='email' value={loginValidation.values.email}
-            onChange={loginValidation.handleChange} />
+      <div className='login-container'>
+        <div className="login-form">
+          <form onSubmit={loginValidation.handleSubmit}>
+            <div className="input-holder">
+              <label htmlFor="email">Email</label>
+              <input type="text" id='email' value={loginValidation.values.email} onChange={loginValidation.handleChange} />
+              {loginValidation.errors.email && loginValidation.touched.email && (
+                <p className='error'>{loginValidation.errors.email}</p>
+              )}
+            </div>
+            <div className="input-holder">
+              <label htmlFor="password">Password</label>
+              <input type="password" id='password' value={loginValidation.values.password} onChange={loginValidation.handleChange} />
+              {loginValidation.errors.password && loginValidation.touched.password && (
+                <p className='error'>{loginValidation.errors.password}</p>
+              )}
+            </div>
+            <div className="input-holder">
+              <button type="submit">Login</button>
+            </div>
+            <div className="input-holder">
+              <a href="/register" className="register-link">Don't have an account?</a>
+            </div>
+          </form>
         </div>
-        <div className="input-holder">
-          <label htmlFor="password">Password</label>
-          <input type="password" id='password' value={loginValidation.values.password}
-            onChange={loginValidation.handleChange} />
-        </div>
-        <div className="input-holder">
-          <button type="submit">Login</button>
-        </div>
-        <div className="input-holder">
-          <a href="/register">Don't have an account?</a>
-        </div>
-      </form>
-
+      </div>
+      <Footer/>
     </>
   )
 }

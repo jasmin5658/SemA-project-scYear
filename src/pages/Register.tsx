@@ -4,7 +4,9 @@ import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CustomerProfile } from '../types/CustomerProfile';
-import "../styles/Forms.css"
+import "../styles/register.css"
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 
 export default function Register() {
@@ -108,130 +110,136 @@ export default function Register() {
 
     return (
         <>
-            <h1>Register</h1>
-            <form onSubmit={formik.handleSubmit}>
-                <div className="input-holder">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className={formik.touched.email && formik.errors.email ? 'error' : ''}
-                    />
-                    {formik.touched.email && formik.errors.email ? (
-                        <p className='error'>{formik.errors.email}</p>
-                    ) : null}
-                </div>
-                <div className="input-holder">
-                    <label htmlFor="Fname">First Name</label>
-                    <input
-                        type="text"
-                        id="Fname"
-                        name="Fname"
-                        value={formik.values.Fname}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className={formik.touched.Fname && formik.errors.Fname ? 'error' : ''}
-                    />
-                    {formik.touched.Fname && formik.errors.Fname ? (
-                        <p className='error'>{formik.errors.Fname}</p>
-                    ) : null}
-                </div>
-                <div className="input-holder">
-                    <label htmlFor="Lname">Last Name</label>
-                    <input
-                        type="text"
-                        id="Lname"
-                        name="Lname"
-                        value={formik.values.Lname}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className={formik.touched.Lname && formik.errors.Lname ? 'error' : ''}
-                    />
-                    {formik.touched.Lname && formik.errors.Lname ? (
-                        <p className='error'>{formik.errors.Lname}</p>
-                    ) : null}
-                </div>
-                <div className="input-holder">
-                    <label htmlFor="phone">Phone</label>
-                    <input
-                        type="text"
-                        id="phone"
-                        name="phone"
-                        value={formik.values.phone}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className={formik.touched.phone && formik.errors.phone ? 'error' : ''}
-                    />
-                    {formik.touched.phone && formik.errors.phone ? (
-                        <p className='error'>{formik.errors.phone}</p>
-                    ) : null}
-                </div>
-                <div className="input-holder">
-                    <label htmlFor="image">Image</label>
-                    <input
-                        type="file"
-                        id="image"
-                        name="image"
-                        accept="image/*"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className={formik.touched.image && formik.errors.image ? 'error' : ''}
-                    />
-                    {formik.touched.image && formik.errors.image ? (
-                        <p className='error'>{formik.errors.image}</p>
-                    ) : null}
-                </div>
-                <div className="input-holder">
-                    <label htmlFor="birthDate">Date of Birth</label>
-                    <DatePicker
-                        id="birthDate"
-                        name="birthDate"
-                        selected={formik.values.birthDate}
-                        onChange={handleDateChange}
-                        onBlur={formik.handleBlur}
-                        className={formik.touched.birthDate && formik.errors.birthDate ? 'error' : ''}
-                    />
-                    {formik.touched.birthDate && formik.errors.birthDate ? (
-                        <p className='error'>{formik.errors.birthDate as string}</p>
-                    ) : null}
-                </div>
+            <Navbar />
+            <div className='register-container'>
+                <div className="register-form">
+                    <h1>Sign up</h1>
+                    <form onSubmit={formik.handleSubmit}>
+                        <div className="input-holder">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={formik.touched.email && formik.errors.email ? 'error' : ''}
+                            />
+                            {formik.touched.email && formik.errors.email ? (
+                                <p className='error'>{formik.errors.email}</p>
+                            ) : null}
+                        </div>
+                        <div className="input-holder">
+                            <label htmlFor="Fname">First Name</label>
+                            <input
+                                type="text"
+                                id="Fname"
+                                name="Fname"
+                                value={formik.values.Fname}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={formik.touched.Fname && formik.errors.Fname ? 'error' : ''}
+                            />
+                            {formik.touched.Fname && formik.errors.Fname ? (
+                                <p className='error'>{formik.errors.Fname}</p>
+                            ) : null}
+                        </div>
+                        <div className="input-holder">
+                            <label htmlFor="Lname">Last Name</label>
+                            <input
+                                type="text"
+                                id="Lname"
+                                name="Lname"
+                                value={formik.values.Lname}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={formik.touched.Lname && formik.errors.Lname ? 'error' : ''}
+                            />
+                            {formik.touched.Lname && formik.errors.Lname ? (
+                                <p className='error'>{formik.errors.Lname}</p>
+                            ) : null}
+                        </div>
+                        <div className="input-holder">
+                            <label htmlFor="phone">Phone</label>
+                            <input
+                                type="text"
+                                id="phone"
+                                name="phone"
+                                value={formik.values.phone}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={formik.touched.phone && formik.errors.phone ? 'error' : ''}
+                            />
+                            {formik.touched.phone && formik.errors.phone ? (
+                                <p className='error'>{formik.errors.phone}</p>
+                            ) : null}
+                        </div>
+                        <div className="input-holder">
+                            <label htmlFor="image">Image</label>
+                            <input
+                                type="file"
+                                id="image"
+                                name="image"
+                                accept="image/*"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={formik.touched.image && formik.errors.image ? 'error' : ''}
+                            />
+                            {formik.touched.image && formik.errors.image ? (
+                                <p className='error'>{formik.errors.image}</p>
+                            ) : null}
+                        </div>
+                        <div className="input-holder">
+                            <label htmlFor="birthDate">Date of Birth</label>
+                            <DatePicker
+                                id="birthDate"
+                                name="birthDate"
+                                selected={formik.values.birthDate}
+                                onChange={handleDateChange}
+                                onBlur={formik.handleBlur}
+                                className={formik.touched.birthDate && formik.errors.birthDate ? 'error' : ''}
+                            />
+                            {formik.touched.birthDate && formik.errors.birthDate ? (
+                                <p className='error'>{formik.errors.birthDate as string}</p>
+                            ) : null}
+                        </div>
 
-                <div className="input-holder">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className={formik.touched.password && formik.errors.password ? 'error' : ''}
-                    />
-                    {formik.touched.password && formik.errors.password ? (
-                        <p className='error'>{formik.errors.password}</p>
-                    ) : null}
+                        <div className="input-holder">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={formik.touched.password && formik.errors.password ? 'error' : ''}
+                            />
+                            {formik.touched.password && formik.errors.password ? (
+                                <p className='error'>{formik.errors.password}</p>
+                            ) : null}
+                        </div>
+                        <div className="input-holder">
+                            <label htmlFor="confirmPassword">Confirm Password</label>
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                value={formik.values.confirmPassword}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={formik.touched.confirmPassword && formik.errors.confirmPassword ? 'error' : ''}
+                            />
+                            {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+                                <p className='error'>{formik.errors.confirmPassword}</p>
+                            ) : null}
+                        </div>
+                        <button type="submit">Register</button>
+                    </form>
                 </div>
-                <div className="input-holder">
-                    <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        value={formik.values.confirmPassword}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className={formik.touched.confirmPassword && formik.errors.confirmPassword ? 'error' : ''}
-                    />
-                    {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                        <p className='error'>{formik.errors.confirmPassword}</p>
-                    ) : null}
-                </div>
-                <button type="submit">Register</button>
-            </form>
+            </div>
+            <Footer />
         </>
     );
 }

@@ -1,12 +1,20 @@
 *{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+
   font-family: 'Roboto', sans-serif;
+  color: rgba(217, 234, 215, 0.911);
   color: #232121;
+  list-style: none;
+  scroll-behavior: smooth;
+  user-select: none;
+  font-size: 99%;
+  padding-right: 0;
+  scroll-padding: 0;
+  scroll-padding-right: 0;
+
 }
 
 body {
+
     padding: 1.5rem;
     margin: 0;
     background-color: rgb(226, 244, 214);
@@ -35,7 +43,6 @@ body {
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
-    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
   
@@ -53,6 +60,8 @@ body {
       .hero-btn {
         margin: 1rem auto;  /* Add some margin for better spacing */
         display: inline-block; /* Allow text wrapping if needed */
+        border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 2, 1, 0.655);
         
       }
       

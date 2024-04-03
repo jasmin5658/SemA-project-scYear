@@ -4,9 +4,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Footer from "../components/Footer";
 import { Link } from 'react-router-dom';
-import "../styles/styles.css";
+import "../styles/admin.css";
 import { ProductsContext } from '../context/ProductsContext'; // Import the context value directly
-
+import  Navbar  from "../components/Navbar";
 export default function Admin() {
     const [products, setProducts] = useState([]);
 
@@ -50,7 +50,10 @@ export default function Admin() {
 
     return (
         <>
-            <h1>Admin</h1>
+        <Navbar/>
+        <div className="admin-form">
+         <div className="admin-container">
+            <h1> Hi Admin</h1>
             <form onSubmit={formValidation.handleSubmit}>
                 <div className="input-holder">
                     <label htmlFor="id">ID</label>
@@ -174,12 +177,9 @@ export default function Admin() {
                         <p className='error'>{formValidation.errors.discount}</p>
                     ) : null}
                 </div>
-
-
-
-                <button type="submit">Add</button>
+                <button type="submit" className="add-button">Add Product</button>
             </form>
-            <Footer />
+            </div>
             {/* Popup Modal */}
             <ReactModal
                 isOpen={showPopup}
@@ -209,6 +209,8 @@ export default function Admin() {
                     <Link to="/store">Go to Store</Link> {/* Link to navigate to the store page */}
                 </div>
             </ReactModal >
+            </div>
+            <Footer />
         </>
     );
 }

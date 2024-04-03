@@ -1,0 +1,75 @@
+.login-container {
+    margin: 0 auto;
+    padding: 20px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.708), rgba(0, 0, 0, 0.304)), url(/public/Images/login.jpg);
+    background-size: cover; /* Adjusted property */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.login-form {
+    background-color: #a5a8a5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.564);
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #000;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.input-holder {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    background-color: #3b4d34;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #2b392d;
+}
+
+.register-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #9fe4bb;
+    font-weight: bold;
+}
+
+.register-link:hover {
+    text-decoration: underline;    
+}

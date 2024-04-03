@@ -8,11 +8,11 @@ import Footer from "../components/Footer";
 
 export default function Store() {
   const { products } = useContext<any>(ProductsContext);
-  
+
   return (
     <>
-    <Navbar/>
-      <Row md={2} xs={1} lg={3} className="g-3" style={{  backgroundColor: "#f3ede1b6", marginTop: ".5px", padding: "1rem", borderRadius: "10px"}}>
+      <Navbar />
+      <Row md={2} xs={1} lg={3} className="g-3" style={{ backgroundColor: "#f3ede1b6", marginTop: ".5px", padding: "1rem", margin: "0" }}>
         {products.map((item: StoreItemProps) => (
           <Col key={item.id}>
             <StoreItem {...item} />
