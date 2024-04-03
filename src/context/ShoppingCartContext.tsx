@@ -12,6 +12,7 @@ type ShoppingCartContext = {
   cartQuantity: number;
   cartItems: CartItem[];
   isOpen: boolean;
+  emptyCart: () => void; // Add emptyCart function to the type
 };
 
 const localStorageKey = "shoppingCart"; 
@@ -75,6 +76,11 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     });
   }
 
+  function emptyCart() {
+    setCartItems([]);
+    localStorage.removeItem(localStorageKey); // Clear cart from localStorage
+  }
+
   function removeFromCart(id: number) {
     setCartItems(currItems => currItems.filter(item => item.id !== id));
   }
@@ -85,9 +91,12 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   }, [cartItems]);
 
 
+
+
   return (
     <ShoppingCartContext.Provider
       value={{
+        emptyCart,
         getItemQuantity,
         increaseCartQuantity,
         decreaseCartQuantity,

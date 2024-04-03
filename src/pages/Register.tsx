@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { User } from '../types/CustomerProfile';
+import { CustomerProfile } from '../types/CustomerProfile';
 import "../styles/Forms.css"
 
 
@@ -46,7 +46,7 @@ export default function Register() {
         isAdmin: Yup.boolean().required('Admin status is required'),
     });
 
-    const formik = useFormik<User>({
+    const formik = useFormik<CustomerProfile>({
         initialValues: {
             email: '',
             Fname: '',

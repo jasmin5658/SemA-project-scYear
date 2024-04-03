@@ -1,22 +1,24 @@
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import "../styles/styles.css";
-
+import "../styles/about.css";
 export default function About() {
   return (
     <>
       <Navbar />
-      <div className="about">
-      <h1>about me</h1>
-      My name is Adam, I am a student at the Bezalel School of Art.
-      I grew up in an artistic environment.
-      I was born and raised in Jerusalem, Israel.
-      As a child, I liked watching my grandmother while she was painting beautiful artworks that she would later show in exhibitions. Drawing was always a habit of mine to do instead of paying attention when I need to,
-      but it’s only for the past year that I found myself practicing art with a different approach.
-      As a way for me to truly express my thoughts, feelings and different visions that I have.
-      So as a young artist exploring the tiny bits of life,
-      I invite you to explore my website.
-      Enjoy !
-      </div>
+        <div className="about-content">
+          <h2 className="about-title">About me</h2>
+          <p className="about-caption">
+            I started drawing at the age of 10 and have been drawing ever since.<br></br>
+            the love for art and drawing came from my grandma.<br></br>
+            I was always curious about how things worked and how things looked.<br></br>
+            and this love for art and drawing has
+            started to grow.<br></br>
+            and i started drawing for my friends and family.<br></br>
+            and now i am drawing for you!<br></br>
+            hope you like it!
+          </p>
+        </div>
+      <Footer />
     </>
   )
 }

@@ -11,8 +11,8 @@ export default function Store() {
   
   return (
     <>
-    <Navbar />
-      <Row md={2} xs={1} lg={3} className="g-3">
+    <Navbar/>
+      <Row md={2} xs={1} lg={3} className="g-3" style={{  backgroundColor: "#f3ede1b6", marginTop: ".5px", padding: "1rem", borderRadius: "10px"}}>
         {products.map((item: StoreItemProps) => (
           <Col key={item.id}>
             <StoreItem {...item} />

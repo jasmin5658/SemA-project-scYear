@@ -55,7 +55,7 @@ footer{
   height:auto;
   width: 100vw;
   font-family: "open sans";
-  color: #fff;
+  color: #ce2525;
   
   }
   
@@ -121,4 +121,5 @@ footer{
   background-size: contain;
    background-position: center;
    height: 40;
+   background-size: cover;
    }

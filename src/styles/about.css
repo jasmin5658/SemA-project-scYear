@@ -1,0 +1,61 @@
+
+  .about-content {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.788), rgba(255, 255, 255, 0.299)), url(/public/Images/about.jpg);
+    background-size: cover;
+    background-position: center; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.5rem;
+    color: rgb(4, 33, 10);
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+     }
+  
+  .about-title {
+    font-style:normal;
+    font-size: 2.5em;  
+    color: #000000;        
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  .about-caption {
+    line-height: 1.6;
+    font-size: 1.1em;
+    color: #000000;      
+  }
+  
+  /* Optional responsive adjustments */
+  @media only screen and (max-width: 768px) {
+    .about-content {
+      width: 100%;
+      height: 100vh;
+    }
+  
+    .about-image {
+      margin: 0 auto 20px; /* Center image and add spacing */
+      max-width: 100%;
+    }
+  
+    .about-title {
+      font-size: 1.8em; /* Smaller size for smaller screens */
+    }
+    .about-caption {
+      line-height: 1.4; /* Slightly reduced line height */
+      width: 100%;
+      height: 100vh;
+      margin: 0 auto;
+      padding: 10px;
+      font-size: 1em;
+      text-align: center;
+          }
+  }

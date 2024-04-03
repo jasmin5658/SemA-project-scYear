@@ -1,7 +1,6 @@
 import { Address } from "./Address";
 import { UserHistoryPurchases } from "./UserHistoryPurchases";
 
-
 export type CustomerProfile = {
     email: string; // כתובת מייל 
     Fname: string; //שם פרטי

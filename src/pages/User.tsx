@@ -51,7 +51,7 @@ export default function CustomerProfile() {
     return (
         <>
             <Navbar />
-            <h1>Customer Profile</h1>
+            <h1>User Profile</h1>
             <form onSubmit={formValidation.handleSubmit} className="customer-profile-form">
                 <div className="input-holder">
                     <label htmlFor="email">Email</label>

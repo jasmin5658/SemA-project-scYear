@@ -7,31 +7,34 @@ import { useContext, useEffect, useState } from 'react'; // Import useContext ho
 import { ProductsContext } from '../context/ProductsContext'; // Import ProductsContext
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import "../styles/styles.css"
 
 
 export default function ShoppingCart() {
     const { closeCart, cartItems, isOpen } = useShoppingCart();
-    const productsContext = useContext(ProductsContext); // Use useContext hook to access ProductsContext
-    const { products } = productsContext; // Destructure products from the context
+    const productsContext = useContext(ProductsContext);
+    const { products } = productsContext;
     const [persistedProducts, setPersistedProducts] = useState<Product[] | null>(null);
-    const navigate = useNavigate(); // Access useNavigate
-
-    const { users } = useContext(UserContext); // Access user context
-
-
-    const handleCheckout = () => {
-        const navigate = useNavigate();
-        const { users } = useContext(UserContext);
-
-        if (!users.length) {
-            navigate('/login'); // Redirect to login if not logged in
-        } else {
-            // Proceed with checkout logic here (payment integration, order processing, etc.)
-            console.log('User is logged in, initiate checkout flow'); // Placeholder for checkout logic
-        }
+    const navigate = useNavigate();
+    const { users } = useContext(UserContext);
+  
+    const handleCheckout = async () => {
+      if (!users.length) {
+        alert('Please log in first to proceed with checkout');
+        navigate('/login');
+        return;
+      }
+  
+      // Empty the shopping cart
+      await useShoppingCart().emptyCart(); 
+  
+      // Display thank you message
+      alert('Thank you for your purchase!');
+  
+      // Redirect to a confirmation page or order details page
+      navigate('/confirmation');
     };
-
-
+  
     // Save products to local storage whenever they change
     useEffect(() => {
         localStorage.setItem('products', JSON.stringify(products));
@@ -79,13 +82,12 @@ export default function ShoppingCart() {
                             }, 0)
                         )}
                     </div>
-                </Stack>
                     <Button variant="primary" size="lg" onClick={() => navigate('/payment')}>
-                        <Button variant="primary" size="lg" onClick={() => handleCheckout()}>
-
+                        <Button variant="primary" size="sm" onClick={() => handleCheckout()}>
                             Checkout
                         </Button>
                     </Button>
+                </Stack>
             </Offcanvas.Body>
         </Offcanvas >
         </>

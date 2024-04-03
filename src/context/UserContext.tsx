@@ -1,12 +1,12 @@
 import { createContext, useState, useEffect } from "react";
-import { User } from "../types/CustomerProfile";
+import { CustomerProfile } from "../types/CustomerProfile";
 
 // Create the user context with a more descriptive type for its value
 export const UserContext = createContext<{
-  users: User[];
-  registerClient: (newUser: User) => void;
+  users: CustomerProfile[];
+  registerClient: (newUser: CustomerProfile) => void;
   logoutClient: (email: string) => void;
-  editClient: (updatedUser: User) => void;
+  editClient: (updatedUser: CustomerProfile) => void;
   loadClients: () => void;
   loginClient: (email: string, password: string) => void;
 }>({
@@ -19,7 +19,7 @@ export const UserContext = createContext<{
 });
 
 export default function UserContextProvider({ children }: { children: React.ReactNode }) {
-  const [users, setUsers] = useState<User[]>([{
+  const [users, setUsers] = useState<CustomerProfile[]>([{
     email: "",
     Fname: "",
     Lname: "",
@@ -57,14 +57,14 @@ export default function UserContextProvider({ children }: { children: React.Reac
     const storedUsers = localStorage.getItem('users');
     if (storedUsers) {
       try {
-        setUsers(JSON.parse(storedUsers) as User[]); // Safely parse as User[]
+        setUsers(JSON.parse(storedUsers) as CustomerProfile[]); // Safely parse as User[]
       } catch (error) {
         console.error("Error parsing stored users:", error); // Handle parsing errors
       }
     }
   }, []);
 
-  const registerClient = (newUser: User) => {
+  const registerClient = (newUser: CustomerProfile) => {
     setUsers([...users, newUser]);
     localStorage.setItem('users', JSON.stringify(users));
     // Success message and redirect to profile
@@ -76,7 +76,7 @@ export default function UserContextProvider({ children }: { children: React.Reac
     localStorage.removeItem('users');
   };
 
-  const editClient = (updatedUser: User) => {
+  const editClient = (updatedUser: CustomerProfile) => {
     const userIndex = users.findIndex((user) => user.email === updatedUser.email);
     if (userIndex !== -1) {
       users[userIndex] = updatedUser;
@@ -109,7 +109,7 @@ export default function UserContextProvider({ children }: { children: React.Reac
     loginClient(email, password);
   };
 
-  const handleRegister = (newUser: User) => {
+  const handleRegister = (newUser: CustomerProfile) => {
     registerClient(newUser);
   };
 

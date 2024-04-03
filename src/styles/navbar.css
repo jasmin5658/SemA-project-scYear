@@ -1,32 +1,208 @@
 .navbar {
-    background-color: rgb(226, 244, 214); /* White background color */
-    padding: 2px; /* Add some padding */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1.2rem;
-    font-weight: bold;
+  border-radius: 10px; /* Removed quotes from border-radius value */
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #cabfa56f;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  text-decoration: none;
+  color: inherit;
+  margin-left: 1rem; /* Adjusted margin for logo */
+  margin-right: auto; /* Pushed the login button to the right */
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0 5rem ; /* Equal spacing for list items */
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-links li a:hover {
+  color: #0c4e12; /* Changed hover color to blue */
+}
+
+.login-btn {
+  text-decoration: none;
+  background-color: #38ae5d5f;
+  color: #000000;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0.5rem 1.5rem;
+  border: #000000 0.5px solid;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 1rem; /* Adjusted margin for login button */
+}
+
+.login-btn:hover {
+  background-color: #156631e6; /* Adjust hover color as desired */
+  color: #fff;
+}
+
+.cart-btn {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0rem; /* Adjusted margin for cart button */
+  margin-right: 2rem;
+}
+
+.cart-btn svg {
+  fill: currentColor;
+  width: 2rem;
+  height: 2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.cart-btn:hover svg {
+  fill: #38ae5d5f;
+}
+
+.cart-count {
+  position: absolute;
+  top: 10px;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #ff0000;
+  color: #fff;
+  font-size: 0.75rem;
+  text-align: center;
+  line-height: 1rem;
+  font-weight: bold;
+  margin-left: -0.5rem;
+  margin-top: 0.6rem;
+}
+
+/* Hamburger Menu and Responsive Styles */
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  padding: 2rem;
+  border: none;
+  background-color: transparent;
+  margin-right: 1rem; /* Adjusted margin for hamburger menu */
+}
+
+.hamburger .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #2b3022;
+  margin-bottom: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar.open .hamburger .bar:first-child {
+  transform: translateY(8px) rotate(-45deg);
+}
+
+.navbar.open .hamburger .bar:last-child {
+  transform: translateY(-8px) rotate(45deg);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  display: none; /* Initially hidden */
+}
+
+/* Media Queries for Responsive Design */
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: row; /* Keep items in row for small screens */
+    justify-content: space-between; /* Align items */
+    padding: 2rem 2rem; /* Reset padding */
+  }
+
+  .logo {
+    order: -1; /* Move logo to the far left */
+  }
+
+  .login-btn {
+    margin-right: auto; /* Pushes the cart button to the right */
+  }
+
+  .cart-btn {
+    order: 0; /* Move cart button to the right of the login button */
+    margin-right: auto; /* Pushes the cart button to the right */
+    display: block; /* Show the close button */
+  }
+
+  .hamburger {
+    display: block;
+    margin-left: 10rem; /* Adjusted margin for hamburger menu */
+    margin-right: 0rem;
+  }
+
+  .nav-links {
+    display: none;
     position: fixed;
     top: 0;
-    width: 100%;
-    z-index: 100;
-    margin-left: 0;
-    margin-right: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    width: 70%; /* Adjust width of slide menu */
+    padding: 2rem;
+    z-index: 9;
+    flex-direction: column;
+  }
+
+  .navbar.open .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 6rem;
+    margin-bottom: 0;
+    padding-top: 0rem;
+    padding-left: 20rem;
+    padding-bottom: 1rem;
     border-radius: 10px;
-    margin-bottom: 30px;
-
-  }
-  
-.nav-link {
-    color: #333; /* Text color */
-    text-decoration: none; /* Remove underline */
-    padding: 0.5rem 1rem; /* Add some padding */
-    font-weight: bold; /* Add some weight to the text */
+    background-color: #f3ede1;
+    box-shadow: 0 2px 4px rgb(47, 32, 14);
+    color: #333;
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 7.5rem;
+    transition: all 0.3s ease-in-out;
   }
 
-  .nav-link:hover {
-    color: #0d6efd; /* Change color on hover */
-    transition: color 0.3s ease-in-out; /* Smooth transition */
+  .navbar.open .close-btn {
+    display: block; /* Show close button when navbar is open */
   }
-  
+}

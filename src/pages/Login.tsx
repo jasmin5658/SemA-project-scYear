@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
-import { User } from '../types/CustomerProfile';
+import { CustomerProfile } from '../types/CustomerProfile';
 
 
 export default function Login() {
@@ -30,22 +30,24 @@ export default function Login() {
         return;
       }
 
-      //בדיקה זמנית 
+      // בדיקה זמנית 
       // User check
-      // if (values.email === 'kouzlyjasmin@gmail.com' && values.password === '123456') {
-      //   navigate('/profle');
-      //   return;
+    //   if (values.email === 'kouzlyjasmin@gmail.com' && values.password === '123456') {
+    //     navigate('/profle');
+    //     return;
+    // }
 
-      const user = users.find((u: User) => u.email === values.email && u.password === values.password);
+      const user = users.find((u: CustomerProfile) => u.email === values.email && u.password === values.password);
       if (user) {
         setCurrentUser(user);
         navigate('/profile');
-      } else {
-        alert('Invalid email or password');
+
+        // Store user data in local storage (encrypted if necessary)
+        const userDataString = btoa(JSON.stringify(user)); // Assuming base64 encoding
+        localStorage.setItem('currentUser', userDataString);
       }
-    },
-  }
-  )
+    }
+  });
   return (
     <>
       <Navbar />
