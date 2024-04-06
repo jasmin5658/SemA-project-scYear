@@ -66,7 +66,7 @@ export default function ShoppingCart() {
         <>
         <Offcanvas show={isOpen} onHide={closeCart} placement='end' style={{ backgroundColor: 'rgba(217, 234, 215' }} >
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Products in your cart</Offcanvas.Title>
+                <Offcanvas.Title style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.5rem', color: '#232121', textDecoration: 'underline' }}>Products in your cart</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Stack gap={3}>
