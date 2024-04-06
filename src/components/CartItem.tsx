@@ -30,7 +30,9 @@ export function CartItem({ id, quantity }: CartItemProps) {
                     {quantity > 1 && (
                         <span className="text-muted" style={{
                             fontSize:
-                                "0.65rem"
+                                "0.65rem",
+                            marginLeft: "0.40rem",
+                            fontWeight: "bold",
                         }}>
                             X {quantity}
                         </span>

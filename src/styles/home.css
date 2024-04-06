@@ -68,7 +68,7 @@ body {
       }
       
       .hero-btn a {
-        background-color: #6ee99979; 
+        background-color: #AFB796; 
         color: #fff;
         padding: 10px 20px;
         border: none;
@@ -80,6 +80,6 @@ body {
       }
       
       .hero-btn a:hover {
-        background-color: #156631e6; /* Adjust hover color as desired */
+        background-color: #6A7562; /* Adjust hover color as desired */
       }
 
