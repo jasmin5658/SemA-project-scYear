@@ -30,19 +30,19 @@ export default function StoreItem({ id, name, shortDesc, imag, currQty, price, d
         </Card.Title>
         <div className="mt-auto">
           {quantity === 0 ? (
-            <Button className="w-100" onClick={() => increaseCartQuantity(id)}> + Add to Cart</Button>
+            <Button style={{backgroundColor: "green"}} className="w-100" onClick={() => increaseCartQuantity(id)}> + Add to Cart</Button>
           ) : (
             // Existing code for displaying quantity in cart and buttons for increasing/decreasing quantity
 
 
             <div className="d-flex align-items-center flex-column" style={{ gap: "0.5rem" }}>
               <div className="d-flex align-items-center justify-content-center" style={{ gap: "0.5rem" }}>
-                <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
+                <Button style={{backgroundColor: "green", fontSize: "12px", width: "30px", height: "30px" }} onClick={() => decreaseCartQuantity(id)}>-</Button>
                 <div>
                   <span className="fs-3">{quantity}</span> in
                   cart
                 </div>
-                <Button onClick={() => increaseCartQuantity(id)}>+</Button>
+                <Button style={{backgroundColor: "green",fontSize: "12px", width: "30px",height: "30px" }} onClick={() => increaseCartQuantity(id)}>+</Button>
               </div>
               <Button onClick={() => removeFromCart(id)}
                 variant="danger" size="sm"
