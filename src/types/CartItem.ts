@@ -7,6 +7,7 @@ export type CartItem = {
     minQty: number;
     quantity: number;
     price: number;
-    discount?: number;   
+    discount?: number;
+    category:string;   
 }
 

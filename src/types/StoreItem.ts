@@ -8,5 +8,7 @@ export type StoreItem = {
     minQty: number;
     currQty: number;
     price: number;
-    discount?: number;   
+    discount?: number; 
+    category: string; 
+  
 }

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom';
 import { routes } from './routes/routes';
 import ProductsProvider from './context/ProductsContext.tsx';
-import UserProvider from './context/UserContext.tsx';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ShoppingCartProvider } from './context/ShoppingCartContext.tsx';
 import UserContextProvider from './context/UserContext.tsx';

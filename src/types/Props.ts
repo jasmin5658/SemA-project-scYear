@@ -12,6 +12,7 @@ export type StoreItemProps={
     currQty: number;
     price: number;
     discount?: number;   
+    category: string; 
 }
 export type ProductPageProps = {
     productList:Array<ProductPageProps>
@@ -52,7 +53,9 @@ export type ProductsContextProviderProps={
     minQty: number;
     currQty: number;
     price: number;
-    discount?: number;   
+    discount?: number;  
+    category: string; 
+ 
     
     children: React.ReactNode;
 }

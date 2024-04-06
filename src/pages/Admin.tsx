@@ -17,7 +17,7 @@ export default function Admin() {
     const productSchema = Yup.object({
         id: Yup.number().min(0, 'ID must be greater than 0').required('Please enter a valid ID number'),
         name: Yup.string().required('Please enter a valid name'),
-        shortDesc: Yup.string().required('Please enter a short description'),
+        category: Yup.string().required('Please enter a  valid category'),
         longDesc: Yup.string(),
         imag: Yup.string().required('Please enter a valid image URL'),
         minQty: Yup.number().min(0, 'Min quantity must be greater than or equal to 0').required('Please enter a valid quantity'),
@@ -31,7 +31,7 @@ export default function Admin() {
         initialValues: {
             id: 0,
             name: "",
-            shortDesc: "",
+            category: "",
             longDesc: "",
             imag: "",
             minQty: 0,
@@ -82,16 +82,16 @@ export default function Admin() {
                     ) : null}
                 </div>
                 <div className="input-holder">
-                    <label htmlFor="shortDesc">Short Description</label>
+                    <label htmlFor="category">Category</label>
                     <input
-                        id="shortDesc"
+                        id="category"
                         type="text"
-                        value={formValidation.values.shortDesc}
+                        value={formValidation.values.category}
                         onChange={formValidation.handleChange}
                         onBlur={formValidation.handleBlur}
                     />
-                    {formValidation.errors.shortDesc && formValidation.touched.shortDesc ? (
-                        <p className='error'>{formValidation.errors.shortDesc}</p>
+                    {formValidation.errors.category && formValidation.touched.category ? (
+                        <p className='error'>{formValidation.errors.category}</p>
                     ) : null}
                 </div>
                 <div className="input-holder">

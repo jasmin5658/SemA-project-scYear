@@ -7,7 +7,6 @@ import { useContext, useEffect, useState } from 'react'; // Import useContext ho
 import { ProductsContext } from '../context/ProductsContext'; // Import ProductsContext
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import "../styles/styles.css"
 
 
 export default function ShoppingCart() {
