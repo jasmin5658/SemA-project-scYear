@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import { CustomerProfile } from '../types/CustomerProfile';
-import "../styles/login.css"; // Import the CSS file
+import "../styles/login.css"; 
 import Footer from '../components/Footer';
 
 export default function Login() {

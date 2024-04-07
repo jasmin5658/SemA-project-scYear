@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
@@ -7,10 +7,12 @@ import { CustomerProfile } from '../types/CustomerProfile';
 import "../styles/register.css"
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-
+import { useState } from 'react';
+import Profile from '../pages/Profile';
 
 export default function Register() {
     const navigate = useNavigate();
+    const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
     const validationSchema = Yup.object({
         email: Yup.string().required('Email is required').email('Invalid email address'),
@@ -18,8 +20,15 @@ export default function Register() {
         Lname: Yup.string().required('Last name is required'),
         phone: Yup.string().required('Phone number is required').matches(/^\d+$/, 'Invalid phone number'),
         image: Yup.string().optional(), // No validation for image as it's a file
-        birthDate: Yup.date().required('Date of birth is required'),
-        password: Yup.string().min(6, 'Password must be at least 6 characters long').required('Password is required'),
+        birthDate: Yup.date().required('Date of birth is required').max(new Date(), 'Date of birth cannot be in the future').test('age', 'You must be at least 18 years old', function(value) {
+            const eighteenYearsAgo = new Date();
+            eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+            return value <= eighteenYearsAgo;
+        }),
+        password: Yup.string()
+            .min(6, 'Password must be at least 6 characters long')
+            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/, 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character')
+            .required('Password is required'),
         confirmPassword: Yup.string()
             .oneOf([Yup.ref('password'), undefined], 'Passwords must match')
             .required('Confirm password is required'),
@@ -84,26 +93,29 @@ export default function Register() {
         validationSchema,
         onSubmit: async (values) => {
             try {
-
                 console.log('Registration successful:', values);
-
+        
                 // Save user data to local storage
                 localStorage.setItem('registeredUser', JSON.stringify(values));
-
+        
                 // Mark the user as active
                 const user = { ...values, isActive: true };
-
+        
                 // Save the updated user data to local storage
                 localStorage.setItem('currentUser', JSON.stringify(user));
-
-                navigate('/profile');
+        
+                setRegistrationSuccess(true);
+                setTimeout(() => {
+                    setRegistrationSuccess(false);
+                    navigate('/profile');
+                }, 3000);
             } catch (error) {
                 console.error('Registration failed:', error);
                 alert('Registration failed. Please try again.');
             }
         },
     });
-
+        
     const handleDateChange = (date: Date) => {
         formik.setFieldValue('birthDate', date);
     };
@@ -198,6 +210,9 @@ export default function Register() {
                                 selected={formik.values.birthDate}
                                 onChange={handleDateChange}
                                 onBlur={formik.handleBlur}
+                                showYearDropdown
+                                scrollableYearDropdown
+                                yearDropdownItemNumber={100}
                                 className={formik.touched.birthDate && formik.errors.birthDate ? 'error' : ''}
                             />
                             {formik.touched.birthDate && formik.errors.birthDate ? (
@@ -239,8 +254,12 @@ export default function Register() {
                     </form>
                 </div>
             </div>
+            {registrationSuccess && (
+                <div className="success-message">
+                    <p>Registration successful! Redirecting to your profile...</p>
+                </div>
+            )}
             <Footer />
         </>
     );
 }
-

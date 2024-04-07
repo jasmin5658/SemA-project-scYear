@@ -1,4 +1,4 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   // Retrieve user data from local storage (encrypted for sensitive data)

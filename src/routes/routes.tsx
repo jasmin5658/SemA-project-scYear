@@ -8,7 +8,6 @@ import NotFound from "../pages/notFound";
 import Register from "../pages/Register";
 import Admin from "../pages/Admin";
 import Profile from "../pages/Profile";
-import PaymentPage from "../pages/payment";
 import CustomerProfile from "../pages/Profile";
 
 
@@ -53,10 +52,6 @@ export const routes = createBrowserRouter([
     {
         path: '/profile',
         element: <Profile />
-    },
-    {
-        path: '/payment',
-        element: <PaymentPage/>
     },
     
 
