@@ -4,6 +4,7 @@ import { CustomerProfile } from "../types/CustomerProfile";
 // Create the user context with a more descriptive type for its value
 export const UserContext = createContext<{
   users: CustomerProfile[];
+  currentUser: CustomerProfile | null; // הוספת תכונה currentUser
   registerClient: (newUser: CustomerProfile) => void;
   logoutClient: (email: string) => void;
   editClient: (updatedUser: CustomerProfile) => void;
@@ -11,6 +12,7 @@ export const UserContext = createContext<{
   loginClient: (email: string, password: string) => void;
 }>({
   users: [],
+  currentUser: null, // השמת ערך מתחילית של null לתכונה currentUser
   registerClient: () => { },
   logoutClient: () => { },
   editClient: () => { },

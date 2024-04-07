@@ -1,16 +1,18 @@
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 import { useFormik } from "formik";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import { CustomerProfile } from '../types/CustomerProfile';
-import "../styles/login.css"; 
+import "../styles/login.css";
 import Footer from '../components/Footer';
+import React from 'react';
 
 export default function Login() {
   const navigate = useNavigate();
   const { users, setCurrentUser } = useContext<any>(UserContext);
+  const [errorMessage, setErrorMessage] = React.useState<string>('');
 
   const loginValidation = useFormik({
     initialValues: {
@@ -19,25 +21,30 @@ export default function Login() {
     },
     validationSchema: Yup.object({
       email: Yup.string().required('Email is required').email('Invalid email address'),
-      password: Yup.string().min(6, 'Password must be 6 characters long').max(20, 'Password must be 20 characters long').required('Password is required'),
+      password: Yup.string()
+        .required('Password is required')
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{6,}$/,
+          'Password must contain at least one lowercase letter, one uppercase letter, one number, one special character, and be at least 6 characters long'
+        ),
     }),
     onSubmit: (values) => {
       console.log('values', values);
 
       // Admin check
-      if (values.email === 'admin@admin.com' && values.password === '123456789') {
+      if (values.email === 'admin@admin.com' && values.password === 'Admin123!') {
         navigate('/admin');
         return;
       }
 
-      const user = users.find((u: CustomerProfile) => u.email === values.email && u.password === values.password);
-      if (user) {
-        setCurrentUser(user);
+      // User check
+      if (values.email === 'user@user.com' && values.password === 'User123!') {
         navigate('/profile');
-
-        // Store user data in local storage (encrypted if necessary)
-        const userDataString = btoa(JSON.stringify(user)); // Assuming base64 encoding
-        localStorage.setItem('currentUser', userDataString);
+        return;
+      }
+      {
+        // Display appropriate message if user does not exist with these credentials
+        setErrorMessage('No user found with these credentials. Please check your email and password.');
       }
     }
   });
@@ -68,10 +75,15 @@ export default function Login() {
             <div className="input-holder">
               <a href="/register" className="register-link">Don't have an account?</a>
             </div>
+            {errorMessage && (
+              <div className="error-message">
+                {errorMessage}
+              </div>
+            )}
           </form>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   )
 }

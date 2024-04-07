@@ -3,7 +3,6 @@ import * as Yup from 'yup';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { CustomerProfile } from '../types/CustomerProfile';
-import { Address } from "../types/Address";
 
 export default function CustomerProfile() {
 
@@ -144,6 +143,8 @@ export default function CustomerProfile() {
                 <button type="submit">Submit</button>
             </form>
             <Footer />
+
+            
         </>
     )
 }

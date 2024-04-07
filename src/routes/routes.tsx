@@ -11,7 +11,6 @@ import Profile from "../pages/Profile";
 import CustomerProfile from "../pages/Profile";
 
 
-
 export const routes = createBrowserRouter([
     {
         path: '/',
